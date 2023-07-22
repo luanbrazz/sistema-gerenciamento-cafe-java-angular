@@ -31,7 +31,7 @@ public class CustomerUsersDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Registro de uma mensagem de log com o nome de usuário que está sendo buscado.
-        log.info("Dentro de loadUserByUsername{}", username);
+        log.info("Dentro de loadUserByUsername {}", username);
         // Busca o usuário no banco de dados com o e-mail fornecido pelo Spring Security.
         usuarioDetail = usuarioDao.findByEmailId(username);
         // Verifica se o usuário foi encontrado no banco de dados.

@@ -1,5 +1,7 @@
 package com.luan.gerenciamentocafeapi.serviceImpl;
 
+import com.luan.gerenciamentocafeapi.JWT.CustomerUsersDetailsService;
+import com.luan.gerenciamentocafeapi.JWT.JwtUtil;
 import com.luan.gerenciamentocafeapi.POJO.Usuario;
 import com.luan.gerenciamentocafeapi.constents.CafeConstants;
 import com.luan.gerenciamentocafeapi.dao.UsuarioDao;
@@ -9,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -18,11 +23,24 @@ import java.util.Objects;
 @Slf4j
 // Anotação para indicar que esta classe é um serviço
 @Service
+// Classe que implementa a interface UsuarioService para fornecer os serviços relacionados a usuários.
 public class UsuarioServiceImpl implements UsuarioService {
 
     // Atributo do tipo UsuarioDao que é injetado pelo Spring
     @Autowired
     UsuarioDao usuarioDao;
+
+    // Atributo do tipo AuthenticationManager que é injetado pelo Spring para autenticação de usuários.
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    // Atributo do tipo CustomerUsersDetailsService que é injetado pelo Spring para carregar detalhes do usuário durante a autenticação.
+    @Autowired
+    CustomerUsersDetailsService customerUsersDetailsService;
+
+    // Atributo do tipo JwtUtil que é injetado pelo Spring para trabalhar com tokens JWT.
+    @Autowired
+    JwtUtil jwtUtil;
 
     // Implementação do método signUp da interface UsuarioService
     @Override
@@ -77,5 +95,37 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setRole("usuario");
 
         return usuario;
+    }
+
+    // Implementação do método login da interface UsuarioService
+    @Override
+    public ResponseEntity<String> login(Map<String, String> requestMap) {
+        log.info("Entrou em Login");
+        try {
+            // Realiza a autenticação do usuário com as credenciais fornecidas no mapa de login.
+            Authentication auth = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("senha"))
+            );
+            // Verifica se a autenticação foi bem-sucedida.
+            if (auth.isAuthenticated()) {
+                // Verifica se o usuário está ativo no sistema.
+                if (customerUsersDetailsService.getUsuarioDetail().getStatus().equalsIgnoreCase("true")) {
+                    // Gera um token JWT e retorna uma resposta HTTP com o token no corpo da resposta.
+                    return new ResponseEntity<String>("{\"token\":\"" +
+                            jwtUtil.generateToken(customerUsersDetailsService.getUsuarioDetail().getEmail(),
+                                    customerUsersDetailsService.getUsuarioDetail().getRole()) + "\"}",
+                            HttpStatus.OK);
+                } else {
+                    // Retorna uma resposta HTTP com o status BAD REQUEST e a mensagem "Contate o administrador" caso o usuário não esteja ativo.
+                    return new ResponseEntity<String>("{\"mensagem\":\"" + CafeConstants.CONTATE_O_ADM + "\"}",
+                            HttpStatus.BAD_REQUEST);
+                }
+            }
+        } catch (Exception exception) {
+            log.error("{}", exception);
+        }
+        // Retorna uma resposta HTTP com o status BAD REQUEST e a mensagem "Credencial inválida" caso a autenticação falhe.
+        return new ResponseEntity<String>("{\"mensagem\":\"" + CafeConstants.CREDENCIAL_INVALIDA + "\"}",
+                HttpStatus.BAD_REQUEST);
     }
 }

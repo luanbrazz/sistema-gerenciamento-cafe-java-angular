@@ -23,8 +23,19 @@ public class UsuarioRestImpl implements UsuarioRest {
         try {
             // Chama o método signUp do usuarioService para processar a requisição
             return usuarioService.signUp(requestMap);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
+        }
+        // Se ocorrer uma exceção, retorna uma resposta padronizada de erro
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> login(Map<String, String> requestMap) {
+        try {
+            return usuarioService.login(requestMap);
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         // Se ocorrer uma exceção, retorna uma resposta padronizada de erro
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
