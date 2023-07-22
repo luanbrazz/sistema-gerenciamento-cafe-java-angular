@@ -14,16 +14,20 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.Objects;
 
-@Slf4j // Anotação do Lombok para gerar automaticamente um logger chamado 'log'
+// Anotação do Lombok para gerar automaticamente um logger chamado 'log'
+@Slf4j
+// Anotação para indicar que esta classe é um serviço
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
+    // Atributo do tipo UsuarioDao que é injetado pelo Spring
     @Autowired
-    UsuarioDao usuarioDao; //repository
+    UsuarioDao usuarioDao;
 
     // Implementação do método signUp da interface UsuarioService
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
+        // Loga o mapa de cadastro
         log.info("Dentro do cadastro {}", requestMap);
 
         try {
@@ -34,17 +38,22 @@ public class UsuarioServiceImpl implements UsuarioService {
                 if (Objects.isNull(usuario)) {
                     // Salva o novo usuário no banco de dados
                     usuarioDao.save(getUsuarioFromMap(requestMap));
+                    // Retorna uma resposta HTTP com o status OK e a mensagem "Registro efetuado com sucesso"
                     return CafeUtils.getResponseEntity(CafeConstants.SUCESSO_REGISTRO, HttpStatus.OK);
                 } else {
+                    // Retorna uma resposta HTTP com o status BAD REQUEST e a mensagem "Email inválido"
                     return CafeUtils.getResponseEntity(CafeConstants.EMAIL_INVALIDO, HttpStatus.BAD_REQUEST);
                 }
             } else {
+                // Retorna uma resposta HTTP com o status BAD REQUEST e a mensagem "Dados inválidos"
                 return CafeUtils.getResponseEntity(CafeConstants.DADOS_INVALIDOS, HttpStatus.BAD_REQUEST);
             }
-        } catch (Exception exception){
+        } catch (Exception exception) {
+            // Imprime a pilha de chamadas da exceção no console
             exception.printStackTrace();
+            // Retorna uma resposta HTTP com o status INTERNAL SERVER ERROR e a mensagem "Algo deu errado"
+            return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // Valida se o mapa de cadastro possui todos os campos necessários
@@ -52,8 +61,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (requestMap.containsKey("nome") && requestMap.containsKey("numeroContato")
                 && requestMap.containsKey("email") && requestMap.containsKey("senha")) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     // Cria um objeto Usuario a partir do mapa de cadastro
