@@ -15,6 +15,8 @@ import java.io.Serializable;
 // consultas pré-definidas que podem ser facilmente referenciadas por um nome em vez de escrever a consulta completa
 // toda vez que ela for necessária.
 
+@NamedQuery(name = "Usuario.getAllUsuario", query = "select new com.luan.gerenciamentocafeapi.DTO.UsuarioDTO(u.id, u.nome, u.email, u.numeroContato, u.status) from Usuario u where u.role='usuario'")
+
 @Entity // Indica que essa classe é uma entidade mapeada do JPA
 @DynamicUpdate // Atualiza apenas as colunas que foram modificadas
 @DynamicInsert // Insere apenas as colunas que foram preenchidas

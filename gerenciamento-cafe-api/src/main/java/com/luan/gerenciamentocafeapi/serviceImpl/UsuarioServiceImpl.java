@@ -1,6 +1,8 @@
 package com.luan.gerenciamentocafeapi.serviceImpl;
 
+import com.luan.gerenciamentocafeapi.DTO.UsuarioDTO;
 import com.luan.gerenciamentocafeapi.JWT.CustomerUsersDetailsService;
+import com.luan.gerenciamentocafeapi.JWT.JwtFilter;
 import com.luan.gerenciamentocafeapi.JWT.JwtUtil;
 import com.luan.gerenciamentocafeapi.POJO.Usuario;
 import com.luan.gerenciamentocafeapi.constents.CafeConstants;
@@ -16,6 +18,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -42,7 +46,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     JwtUtil jwtUtil;
 
-    // Implementação do método signUp da interface UsuarioService
+    @Autowired
+    JwtFilter jwtFilter;
+
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
         // Loga o mapa de cadastro
@@ -127,5 +133,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Retorna uma resposta HTTP com o status BAD REQUEST e a mensagem "Credencial inválida" caso a autenticação falhe.
         return new ResponseEntity<String>("{\"mensagem\":\"" + CafeConstants.CREDENCIAL_INVALIDA + "\"}",
                 HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public ResponseEntity<List<UsuarioDTO>> getAllUsuario() {
+        try {
+            if (jwtFilter.isAdmin()) {
+                return new ResponseEntity<>(usuarioDao.getAllUsuario(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

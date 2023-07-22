@@ -1,5 +1,6 @@
 package com.luan.gerenciamentocafeapi.restImpl;
 
+import com.luan.gerenciamentocafeapi.DTO.UsuarioDTO;
 import com.luan.gerenciamentocafeapi.constents.CafeConstants;
 import com.luan.gerenciamentocafeapi.rest.UsuarioRest;
 import com.luan.gerenciamentocafeapi.service.UsuarioService;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,4 +43,16 @@ public class UsuarioRestImpl implements UsuarioRest {
         // Se ocorrer uma exceção, retorna uma resposta padronizada de erro
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<List<UsuarioDTO>> findAllUsuario() {
+        try {
+            return usuarioService.getAllUsuario();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return new ResponseEntity<List<UsuarioDTO>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 }
