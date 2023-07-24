@@ -21,4 +21,7 @@ public interface UsuarioRest {
 
     @GetMapping(path = "/get")
     public ResponseEntity<List<UsuarioDTO>> findAllUsuario();
+
+    @PostMapping(path = "/update")
+    public ResponseEntity<String> update(@RequestBody(required = true) Map<String, String> requestMap);
 }

@@ -47,12 +47,26 @@ public class UsuarioRestImpl implements UsuarioRest {
     @Override
     public ResponseEntity<List<UsuarioDTO>> findAllUsuario() {
         try {
+            // Chama o método getAllUsuario do usuarioService para obter a lista de usuários e retorna a resposta
             return usuarioService.getAllUsuario();
         } catch (Exception exception) {
+            // Em caso de exceção, imprime o stack trace para fins de depuração
             exception.printStackTrace();
         }
+        // Se ocorrer uma exceção, retorna uma resposta padronizada de erro com status 500 - INTERNAL_SERVER_ERROR
         return new ResponseEntity<List<UsuarioDTO>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
+    @Override
+    public ResponseEntity<String> update(Map<String, String> requestMap) {
+        try {
+            // Chama o método update do usuarioService para processar a requisição e retorna a resposta
+            return usuarioService.update(requestMap);
+        } catch (Exception exception) {
+            // Em caso de exceção, imprime o stack trace para fins de depuração
+            exception.printStackTrace();
+        }
+        // Se ocorrer uma exceção, retorna uma resposta padronizada de erro com status 500 - INTERNAL_SERVER_ERROR
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

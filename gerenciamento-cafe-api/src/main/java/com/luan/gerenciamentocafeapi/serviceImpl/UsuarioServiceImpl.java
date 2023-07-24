@@ -9,6 +9,7 @@ import com.luan.gerenciamentocafeapi.constents.CafeConstants;
 import com.luan.gerenciamentocafeapi.dao.UsuarioDao;
 import com.luan.gerenciamentocafeapi.service.UsuarioService;
 import com.luan.gerenciamentocafeapi.utils.CafeUtils;
+import com.luan.gerenciamentocafeapi.utils.EmailUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 // Anotação do Lombok para gerar automaticamente um logger chamado 'log'
 @Slf4j
@@ -49,6 +47,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     JwtFilter jwtFilter;
 
+    @Autowired
+    EmailUtils emailUtils;
+
+    // Implementação do método signUp da interface UsuarioService
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
         // Loga o mapa de cadastro
@@ -135,17 +137,79 @@ public class UsuarioServiceImpl implements UsuarioService {
                 HttpStatus.BAD_REQUEST);
     }
 
+    // Implementação do método getAllUsuario da interface UsuarioService
     @Override
     public ResponseEntity<List<UsuarioDTO>> getAllUsuario() {
         try {
             if (jwtFilter.isAdmin()) {
+                // Obtém a lista de todos os usuários do banco de dados e retorna uma resposta HTTP com a lista e status 200 - OK.
                 return new ResponseEntity<>(usuarioDao.getAllUsuario(), HttpStatus.OK);
             } else {
+                // Retorna uma resposta HTTP com o status UNAUTHORIZED (401) caso o usuário não seja um administrador.
                 return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+        // Retorna uma resposta HTTP com o status INTERNAL_SERVER_ERROR (500) caso ocorra uma exceção.
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    // Implementação do método update da interface UsuarioService
+    @Override
+    public ResponseEntity<String> update(Map<String, String> requestMap) {
+        try {
+            if (jwtFilter.isAdmin()) {
+                Optional<Usuario> optional = usuarioDao.findById(Integer.parseInt(requestMap.get("id")));
+
+                if (!optional.isEmpty()) {
+                    // Atualiza o status do usuário no banco de dados com base no mapa de requisição.
+                    usuarioDao.updateStatus(requestMap.get("status"), Integer.parseInt(requestMap.get("id")));
+                    // Envia e-mail para todos os administradores informando sobre a atualização de status.
+                    sendMailToAllAdmin(requestMap.get("status"), optional.get().getEmail(), usuarioDao.getAllAdmin());
+                    // Retorna uma resposta HTTP com o status OK e a mensagem "Status atualizado com sucesso".
+                    return CafeUtils.getResponseEntity(CafeConstants.SUCESSO_UPDATE_STATUS, HttpStatus.OK);
+                } else {
+                    // Retorna uma resposta HTTP com o status OK e a mensagem "ID de usuário inexistente".
+                    return CafeUtils.getResponseEntity(CafeConstants.ID_USUARIO_INEXISTENTE, HttpStatus.OK);
+                }
+
+            } else {
+                // Retorna uma resposta HTTP com o status UNAUTHORIZED (401) caso o usuário não seja um administrador.
+                return CafeUtils.getResponseEntity(CafeConstants.ACESSO_NEGADO, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        // Retorna uma resposta HTTP com o status INTERNAL_SERVER_ERROR (500) caso ocorra uma exceção.
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private void sendMailToAllAdmin(String status, String usuario, List<String> allAdmin) {
+        allAdmin.remove(jwtFilter.getUsuarioAtual());
+        String assunto;
+        String texto;
+
+        if (status != null && status.equalsIgnoreCase("true")) {
+            // E-mail de aprovação de usuário
+            assunto = CafeConstants.ASSUNTO_CONTA_APROVADA;
+            texto = "Olá Administrador,\n\n";
+            texto += "Gostaríamos de informar que o usuário " + usuario + " foi aprovado por " + jwtFilter.getUsuarioAtual() + ".\n";
+            texto += "A partir de agora, o usuário tem acesso ao sistema de gerenciamento de cafés.\n\n";
+        } else {
+            // E-mail de desativação de usuário
+            assunto = CafeConstants.ASSUNTO_CONTA_DESABILITADA;
+            texto = "Prezado Administrador,\n\n";
+            texto += "Informamos que o acesso do usuário " + usuario + " foi desabilitado por " + jwtFilter.getUsuarioAtual() + ".\n";
+            texto += "O usuário não terá mais permissão para acessar o sistema de gerenciamento de cafés.\n\n";
+        }
+
+        texto += "Você pode verificar os detalhes do usuário e sua atividade na seção de administrador do sistema.\n\n";
+        texto += "Atenciosamente,\n";
+        texto += "Equipe de Administração do Sistema";
+
+        // Envia um e-mail para todos os administradores com as informações construídas acima.
+        emailUtils.sendSimpleMessage(jwtFilter.getUsuarioAtual(), assunto, texto, allAdmin);
+    }
+
 }

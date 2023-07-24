@@ -12,4 +12,6 @@ public interface UsuarioService {
     ResponseEntity<String> login(Map<String, String> requestMap);
 
     ResponseEntity<List<UsuarioDTO>> getAllUsuario();
+
+    ResponseEntity<String> update(Map<String, String> requestMap);
 }

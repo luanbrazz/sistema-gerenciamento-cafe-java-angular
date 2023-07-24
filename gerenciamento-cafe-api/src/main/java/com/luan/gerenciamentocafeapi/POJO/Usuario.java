@@ -6,21 +6,20 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.io.Serializable;
 
-//@Data Anotação do Lombok que gera automaticamente os métodos toString, equals, hashCode, getters e setters
-//@NoArgsConstructor // Gera um construtor sem argumentos
-//@AllArgsConstructor // Gera um construtor com todos os argumentos
-
+// Anotação @NamedQuery usada para definir consultas nomeadas em uma entidade mapeada do JPA.
 @NamedQuery(name = "Usuario.findByEmailId", query = "select u from Usuario u where u.email=:email")
-//A anotação @NamedQuery é usada para definir consultas nomeadas em uma entidade mapeada do JPA. Essas consultas são
-// consultas pré-definidas que podem ser facilmente referenciadas por um nome em vez de escrever a consulta completa
-// toda vez que ela for necessária.
-
 @NamedQuery(name = "Usuario.getAllUsuario", query = "select new com.luan.gerenciamentocafeapi.DTO.UsuarioDTO(u.id, u.nome, u.email, u.numeroContato, u.status) from Usuario u where u.role='usuario'")
+@NamedQuery(name = "Usuario.getAllAdmin", query = "select u.email from Usuario u where u.role='admin'")
+@NamedQuery(name = "Usuario.updateStatus", query = "update Usuario u set u.status=:status where u.id=:id")
 
-@Entity // Indica que essa classe é uma entidade mapeada do JPA
-@DynamicUpdate // Atualiza apenas as colunas que foram modificadas
-@DynamicInsert // Insere apenas as colunas que foram preenchidas
-@Table(name = "Usuario") // Mapeia a tabela "Usuario" no banco de dados
+// Anotação @Entity indica que essa classe é uma entidade mapeada do JPA
+@Entity
+// Anotação @DynamicUpdate faz com que a atualização afete apenas as colunas que foram modificadas
+@DynamicUpdate
+// Anotação @DynamicInsert faz com que a inserção afete apenas as colunas que foram preenchidas
+@DynamicInsert
+// Mapeia a tabela "Usuario" no banco de dados
+@Table(name = "Usuario")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID=1L;
