@@ -212,4 +212,29 @@ public class UsuarioServiceImpl implements UsuarioService {
         emailUtils.sendSimpleMessage(jwtFilter.getUsuarioAtual(), assunto, texto, allAdmin);
     }
 
+
+    @Override
+    public ResponseEntity<String> checkToken() {
+        return CafeUtils.getResponseEntity("true", HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<String> changePassword(Map<String, String> requestMap) {
+        try {
+            Usuario usuarioObj = usuarioDao.findByEmail(jwtFilter.getUsuarioAtual());
+            if (!usuarioObj.equals(null)) {
+                if (usuarioObj.getSenha().equals(requestMap.get("senhaAntiga"))) {
+                    usuarioObj.setSenha(requestMap.get("senhaNova"));
+                    usuarioDao.save(usuarioObj);
+                    return CafeUtils.getResponseEntity(CafeConstants.SENHA_ATUALIZADA, HttpStatus.OK);
+                }
+                return CafeUtils.getResponseEntity(CafeConstants.SENHA_ANTIGA_INCORRETA, HttpStatus.BAD_REQUEST);
+            }
+            return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception exception) {
+
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

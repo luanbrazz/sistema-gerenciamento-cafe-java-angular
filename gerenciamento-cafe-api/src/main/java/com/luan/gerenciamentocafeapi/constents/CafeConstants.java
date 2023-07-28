@@ -14,4 +14,6 @@ public class CafeConstants {
     public static final String SUCESSO_UPDATE_STATUS = "Status atualizado com sucesso!";
     public static final String ASSUNTO_CONTA_APROVADA = "Conta aprovada";
     public static final String ASSUNTO_CONTA_DESABILITADA = "Conta Desabilitada";
+    public static final String SENHA_ANTIGA_INCORRETA = "A senha antiga esta incorreta";
+    public static final String SENHA_ATUALIZADA = "A senha foi atualizada com sucesso!";
 }
