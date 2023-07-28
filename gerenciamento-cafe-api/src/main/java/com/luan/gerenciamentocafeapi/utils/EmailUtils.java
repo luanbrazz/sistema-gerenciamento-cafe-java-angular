@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 
 @Service
@@ -50,4 +53,16 @@ public class EmailUtils {
         }
         return cc;
     }
+
+    public void forgotMail(String para, String assunto, String senha) throws MessagingException {
+        MimeMessage mensagem = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mensagem, true);
+        helper.setFrom(remetente);
+        helper.setTo(para);
+        helper.setSubject(assunto);
+        String htmlMsg = "<p><b>Detalhes do seu login para o Sistema de Gerenciamento de Café</b><br><b>Email: </b> " + para + " <br><b>Senha: </b> " + senha + "<br><a href=\"http://localhost:4200/\">Clique aqui para fazer login</a></p>";
+        helper.setText(htmlMsg, true); // Define o conteúdo como HTML
+        javaMailSender.send(mensagem);
+    }
+
 }

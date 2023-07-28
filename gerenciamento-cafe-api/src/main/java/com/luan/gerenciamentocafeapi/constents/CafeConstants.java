@@ -16,4 +16,6 @@ public class CafeConstants {
     public static final String ASSUNTO_CONTA_DESABILITADA = "Conta Desabilitada";
     public static final String SENHA_ANTIGA_INCORRETA = "A senha antiga esta incorreta";
     public static final String SENHA_ATUALIZADA = "A senha foi atualizada com sucesso!";
+    public static final String VERIFICAR_EMAIL = "Verifique suas credenciais no seu email";
+    public static final String CRED_GERENC_CAFE = "Credenciais do Sistema de Gerenciamento de Café";
 }

@@ -1,5 +1,6 @@
 package com.luan.gerenciamentocafeapi.serviceImpl;
 
+import com.google.common.base.Strings;
 import com.luan.gerenciamentocafeapi.DTO.UsuarioDTO;
 import com.luan.gerenciamentocafeapi.JWT.CustomerUsersDetailsService;
 import com.luan.gerenciamentocafeapi.JWT.JwtFilter;
@@ -233,6 +234,21 @@ public class UsuarioServiceImpl implements UsuarioService {
             return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception exception) {
 
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> forgotPassword(Map<String, String> requestMap) {
+        try {
+            Usuario usuario = usuarioDao.findByEmail(requestMap.get("email"));
+            if (!Objects.isNull(usuario) && !Strings.isNullOrEmpty(usuario.getEmail()))
+                emailUtils.forgotMail(usuario.getEmail(), CafeConstants.CRED_GERENC_CAFE, usuario.getSenha());
+
+            return CafeUtils.getResponseEntity(CafeConstants.VERIFICAR_EMAIL, HttpStatus.OK);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
