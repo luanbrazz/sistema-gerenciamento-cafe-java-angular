@@ -73,10 +73,13 @@ public class UsuarioRestImpl implements UsuarioRest {
     @Override
     public ResponseEntity<String> checkToken() {
         try {
+            // Chama o método checkToken do usuarioService para verificar o token e retorna a resposta
             return usuarioService.checkToken();
         } catch (Exception exception) {
+            // Em caso de exceção, imprime o stack trace para fins de depuração
             exception.printStackTrace();
         }
+        // Se ocorrer uma exceção, retorna uma resposta padronizada de erro com status 500 - INTERNAL_SERVER_ERROR
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
