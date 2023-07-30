@@ -1,18 +1,23 @@
 package com.luan.gerenciamentocafeapi.serviceImpl;
 
+import com.google.common.base.Strings;
 import com.luan.gerenciamentocafeapi.JWT.JwtFilter;
 import com.luan.gerenciamentocafeapi.POJO.Categoria;
 import com.luan.gerenciamentocafeapi.constents.CafeConstants;
 import com.luan.gerenciamentocafeapi.dao.CategoriaDao;
 import com.luan.gerenciamentocafeapi.service.CategoriaService;
 import com.luan.gerenciamentocafeapi.utils.CafeUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
@@ -66,5 +71,19 @@ public class CategoriaServiceImpl implements CategoriaService {
         // Define o nome da categoria a partir do mapa da requisição
         categoria.setNome(requestMap.get("nome"));
         return categoria;
+    }
+
+    @Override
+    public ResponseEntity<List<Categoria>> getAllCategoria(String filterValue) {
+        try {
+            if (!Strings.isNullOrEmpty(filterValue) && filterValue.equalsIgnoreCase("true")) {
+                log.info("Entrou no if");
+                return new ResponseEntity<List<Categoria>>(categoriaDao.getAllCategoria(), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(categoriaDao.findAll(), HttpStatus.OK);
+
+        } catch (Exception exception) {
+            return new ResponseEntity<List<Categoria>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
