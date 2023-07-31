@@ -1,5 +1,6 @@
 package com.luan.gerenciamentocafeapi.serviceImpl;
 
+import com.luan.gerenciamentocafeapi.DTO.ProdutoDTO;
 import com.luan.gerenciamentocafeapi.JWT.JwtFilter;
 import com.luan.gerenciamentocafeapi.POJO.Categoria;
 import com.luan.gerenciamentocafeapi.POJO.Produto;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -41,6 +44,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+
     private boolean validateProdutoMap(Map<String, String> requestMap, boolean validateId) {
         if (requestMap.containsKey("nome")) {
             if (requestMap.containsKey("id") && validateId) {
@@ -68,5 +72,15 @@ public class ProdutoServiceImpl implements ProdutoService {
         produto.setPreco(Integer.parseInt(requestMap.get("preco")));
         return produto;
 
+    }
+
+    @Override
+    public ResponseEntity<List<ProdutoDTO>> getAllProduto() {
+        try {
+            return new ResponseEntity<>(produtoDao.getAllProduto(), HttpStatus.OK);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

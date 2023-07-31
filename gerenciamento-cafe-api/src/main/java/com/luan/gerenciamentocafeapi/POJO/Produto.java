@@ -7,6 +7,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.io.Serializable;
 
+@NamedQuery(name = "Produto.getAllProduto", query = "select new com.luan.gerenciamentocafeapi.DTO.ProdutoDTO(p.id,p.nome,p.descricao,p.preco,p.status,p.categoria.id,p.categoria.nome) from Produto p")
+
 @Data
 @Entity
 @DynamicInsert
