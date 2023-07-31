@@ -22,4 +22,6 @@ public class CafeConstants {
     public static final String CATEGORIA_NAO_EXISTE = "Essa categoria não existe";
     public static final String CATEGORIA_UPDATE_SUCESSO = "Categoria atualizada com sucesso!";
     public static final String PRODUTO_ADD_SUCESSO = "Produto criado com sucesso!";
+    public static final String ID_PROD_NAO_EXISTE = "Produto a ser atualizado não foi encontrado no banco de dados!";
+    public static final String PRODUTO_UPDATE_SUCESSO = "Produto atualizado com sucesso!";
 }

@@ -39,4 +39,15 @@ public class ProdutoRestImpl implements ProdutoRest {
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<String> updateProdruto(Map<String, String> requestMap) {
+        try {
+            return produtoService.updateProdruto(requestMap);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
 }

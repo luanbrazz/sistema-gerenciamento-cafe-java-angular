@@ -10,4 +10,6 @@ public interface ProdutoService {
     ResponseEntity<String> addNewProdruto(Map<String, String> requestMap);
 
     ResponseEntity<List<ProdutoDTO>> getAllProduto();
+
+    ResponseEntity<String> updateProdruto(Map<String, String> requestMap);
 }

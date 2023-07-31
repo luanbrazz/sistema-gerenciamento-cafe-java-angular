@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
@@ -83,4 +84,31 @@ public class ProdutoServiceImpl implements ProdutoService {
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<String> updateProdruto(Map<String, String> requestMap) {
+        try {
+            if (jwtFilter.isAdmin()) {
+                if (validateProdutoMap(requestMap, true)) {
+                    Optional<Produto> optional = produtoDao.findById(Integer.parseInt(requestMap.get("id")));
+                    if (!optional.isEmpty()) {
+                        Produto produto = getProdutoFromMap(requestMap, true);
+                        produto.setStatus(optional.get().getStatus());
+                        produtoDao.save(produto);
+                        return CafeUtils.getResponseEntity(CafeConstants.PRODUTO_UPDATE_SUCESSO, HttpStatus.OK);
+                    } else {
+                        return CafeUtils.getResponseEntity(CafeConstants.ID_PROD_NAO_EXISTE, HttpStatus.OK);
+                    }
+                } else {
+                    return CafeUtils.getResponseEntity(CafeConstants.DADOS_INVALIDOS, HttpStatus.BAD_REQUEST);
+                }
+            } else {
+                return CafeUtils.getResponseEntity(CafeConstants.ACESSO_NEGADO, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
