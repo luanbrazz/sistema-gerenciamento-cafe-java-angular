@@ -19,4 +19,6 @@ public interface ProdutoDao extends JpaRepository<Produto, Integer> {
     Integer updateProdutoStatus(@Param("status") String status, @Param("id") Integer id);
 
     List<ProdutoDTO> getProdutoByCategoria(@Param("id") Integer id);
+
+    ProdutoDTO getProdutoById(@Param("id") Integer id);
 }

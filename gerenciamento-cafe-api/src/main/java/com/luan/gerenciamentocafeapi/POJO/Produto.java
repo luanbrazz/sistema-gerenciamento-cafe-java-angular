@@ -13,6 +13,8 @@ import java.io.Serializable;
 
 @NamedQuery(name = "Produto.getProdutoByCategoria", query = "select new com.luan.gerenciamentocafeapi.DTO.ProdutoDTO(p.id, p.nome) from Produto p where p.categoria.id=:id and p.status='true'")
 
+@NamedQuery(name = "Produto.getProdutoById", query = "select new com.luan.gerenciamentocafeapi.DTO.ProdutoDTO(p.id, p.nome, p.descricao, p.preco) from Produto p where p.id=:id")
+
 @Data
 @Entity
 @DynamicInsert

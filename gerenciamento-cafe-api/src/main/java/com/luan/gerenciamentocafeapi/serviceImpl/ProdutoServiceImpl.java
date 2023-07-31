@@ -162,4 +162,14 @@ public class ProdutoServiceImpl implements ProdutoService {
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<ProdutoDTO> getProdutoById(Integer id) {
+        try {
+            return new ResponseEntity<>(produtoDao.getProdutoById(id), HttpStatus.OK);
+        } catch (Exception exception) {
+
+        }
+        return new ResponseEntity<>(new ProdutoDTO(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

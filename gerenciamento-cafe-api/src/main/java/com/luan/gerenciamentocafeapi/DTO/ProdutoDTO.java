@@ -31,4 +31,11 @@ public class ProdutoDTO {
         this.id = id;
         this.nome = nome;
     }
+
+    public ProdutoDTO(Integer id, String nome, String descricao, Integer preco) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+    }
 }
