@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -77,7 +78,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     public ResponseEntity<List<Categoria>> getAllCategoria(String filterValue) {
         try {
             if (!Strings.isNullOrEmpty(filterValue) && filterValue.equalsIgnoreCase("true")) {
-                log.info("Entrou no if");
+                log.info("Entrou no if do metodo getAllCategoria");
                 return new ResponseEntity<List<Categoria>>(categoriaDao.getAllCategoria(), HttpStatus.OK);
             }
             return new ResponseEntity<>(categoriaDao.findAll(), HttpStatus.OK);
@@ -85,5 +86,28 @@ public class CategoriaServiceImpl implements CategoriaService {
         } catch (Exception exception) {
             return new ResponseEntity<List<Categoria>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Override
+    public ResponseEntity<String> updateCategoria(Map<String, String> requestMap) {
+        try {
+            if (jwtFilter.isAdmin()) {
+                if (validateCategoriaMap(requestMap, true)) {
+                    Optional optional = categoriaDao.findById(Integer.parseInt(requestMap.get("id")));
+                    if (!optional.isEmpty()) {
+                        categoriaDao.save(getCategoriaFromMap(requestMap, true));
+                        return CafeUtils.getResponseEntity(CafeConstants.CATEGORIA_UPDATE_SUCESSO, HttpStatus.OK);
+                    } else {
+                        return CafeUtils.getResponseEntity(CafeConstants.CATEGORIA_NAO_EXISTE, HttpStatus.OK);
+                    }
+                }
+                return CafeUtils.getResponseEntity(CafeConstants.DADOS_INVALIDOS, HttpStatus.BAD_REQUEST);
+            } else {
+                return CafeUtils.getResponseEntity(CafeConstants.ACESSO_NEGADO, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

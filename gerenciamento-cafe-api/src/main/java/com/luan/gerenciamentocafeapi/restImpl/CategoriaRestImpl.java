@@ -40,4 +40,14 @@ public class CategoriaRestImpl implements CategoriaRest {
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<String> updateCategoria(Map<String, String> requestMap) {
+        try {
+            return categoriaService.updateCategoria(requestMap);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

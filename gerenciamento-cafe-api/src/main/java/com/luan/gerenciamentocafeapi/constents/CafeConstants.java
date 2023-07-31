@@ -19,4 +19,6 @@ public class CafeConstants {
     public static final String VERIFICAR_EMAIL = "Verifique suas credenciais no seu email";
     public static final String CRED_GERENC_CAFE = "Credenciais do Sistema de Gerenciamento de Café";
     public static final String CATEGORIA_ADD = "Categoria Adicionada com sucesso!";
+    public static final String CATEGORIA_NAO_EXISTE = "Essa categoria não existe";
+    public static final String CATEGORIA_UPDATE_SUCESSO = "Categoria atualizada com sucesso!";
 }
