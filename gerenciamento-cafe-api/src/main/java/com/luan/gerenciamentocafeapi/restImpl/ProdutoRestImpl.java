@@ -50,4 +50,14 @@ public class ProdutoRestImpl implements ProdutoRest {
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
+
+    @Override
+    public ResponseEntity<String> deleteProduto(Integer id) {
+        try {
+            return produtoService.deleteProduto(id);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

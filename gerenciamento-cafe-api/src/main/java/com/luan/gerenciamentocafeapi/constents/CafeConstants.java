@@ -24,4 +24,6 @@ public class CafeConstants {
     public static final String PRODUTO_ADD_SUCESSO = "Produto criado com sucesso!";
     public static final String ID_PROD_NAO_EXISTE = "Produto a ser atualizado não foi encontrado no banco de dados!";
     public static final String PRODUTO_UPDATE_SUCESSO = "Produto atualizado com sucesso!";
+    public static final String PRODUTO_EXCLUIDO = "Produto excluido com sucesso!";
+    public static final String ID_PROD_NAO_EXISTE_DEL = "Produto a ser deletado não foi encontrado no banco de dados!";
 }

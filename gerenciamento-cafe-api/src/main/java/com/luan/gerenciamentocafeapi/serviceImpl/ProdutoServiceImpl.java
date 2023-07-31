@@ -111,4 +111,24 @@ public class ProdutoServiceImpl implements ProdutoService {
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<String> deleteProduto(Integer id) {
+        try {
+            if (jwtFilter.isAdmin()) {
+                Optional optional = produtoDao.findById(id);
+                if (!optional.isEmpty()) {
+                    produtoDao.deleteById(id);
+                    return CafeUtils.getResponseEntity(CafeConstants.PRODUTO_EXCLUIDO, HttpStatus.OK);
+                } else {
+                    return CafeUtils.getResponseEntity(CafeConstants.ID_PROD_NAO_EXISTE_DEL, HttpStatus.OK);
+                }
+            } else {
+                return CafeUtils.getResponseEntity(CafeConstants.ACESSO_NEGADO, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
