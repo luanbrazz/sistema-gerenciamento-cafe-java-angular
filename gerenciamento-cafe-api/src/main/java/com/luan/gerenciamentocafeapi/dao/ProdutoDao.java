@@ -16,5 +16,7 @@ public interface ProdutoDao extends JpaRepository<Produto, Integer> {
     @Modifying
     // O método também é anotado com @Transactional para garantir que a transação seja tratada adequadamente
     @Transactional
-    Integer updateProdutoStatus(@Param("status") String status, @Param("id") int id);
+    Integer updateProdutoStatus(@Param("status") String status, @Param("id") Integer id);
+
+    List<ProdutoDTO> getProdutoByCategoria(@Param("id") Integer id);
 }

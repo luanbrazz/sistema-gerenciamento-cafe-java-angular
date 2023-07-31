@@ -26,4 +26,9 @@ public class ProdutoDTO {
         this.categoriaId = categoriaId;
         this.nomeCategoria = nomeCategoria;
     }
+
+    public ProdutoDTO(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }
