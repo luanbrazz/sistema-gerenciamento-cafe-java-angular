@@ -28,4 +28,7 @@ public class CafeConstants {
     public static final String ID_PROD_NAO_EXISTE_DEL = "Produto a ser deletado não foi encontrado no banco de dados!";
     public static final String ID_PROD_NAO_EXISTE_STATUS = "O Produto com esse id não existe!";
     public static final String STATUS_UPDATE_SUCESSO = "Status do produto atualizado com sucesso!";
+    public static final String DADOS_NAO_ENCONTRADO = "Dados requeridos não preenchidos";
+    public static final String LOCAL_LOJA_NFE = "D:\\Repositorios de Sistemas - cursos\\projetos-pessoais\\pdf-nota-fiscal-sistema-cafe";
+    public static final String TITULO = "Sistema de Gerenciamento de Café";
 }
