@@ -10,4 +10,7 @@ public interface CompraService {
     ResponseEntity<String> gerarRelatorio(Map<String, Object> requestMap);
 
     ResponseEntity<List<Compra>> getCompra();
+
+
+    ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap);
 }

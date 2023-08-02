@@ -18,4 +18,7 @@ public interface CompraRest {
 
     @GetMapping(path = "/getCompra")
     ResponseEntity<List<Compra>> getCompra();
+
+    @PostMapping(path = "/getPdf")
+    ResponseEntity<byte[]> getPdf(@RequestBody Map<String, Object> requestMap);
 }

@@ -38,4 +38,14 @@ public class CompraRestImpl implements CompraRest {
         }
         return null;
     }
+
+    @Override
+    public ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap) {
+        try {
+            return compraService.getPdf(requestMap);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
 }

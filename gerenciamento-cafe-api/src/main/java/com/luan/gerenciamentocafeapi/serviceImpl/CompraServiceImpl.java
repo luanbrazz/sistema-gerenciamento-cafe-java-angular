@@ -11,13 +11,17 @@ import com.luan.gerenciamentocafeapi.dao.CompraDao;
 import com.luan.gerenciamentocafeapi.service.CompraService;
 import com.luan.gerenciamentocafeapi.utils.CafeUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.pdfbox.io.IOUtils;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +62,7 @@ public class CompraServiceImpl implements CompraService {
                 // Cria um novo documento PDF e define o nome do arquivo usando o nomeArquivo gerado
                 Document documento = new Document();
                 PdfWriter.getInstance(documento, new FileOutputStream(CafeConstants.LOCAL_LOJA_NFE + "\\" + nomeArquivo + ".pdf"));
+                log.info("Novo documento " + (String) requestMap.get("uuid") + " gerado na pasta " + CafeConstants.LOCAL_LOJA_NFE);
 
                 // Abre o documento PDF
                 documento.open();
@@ -215,6 +220,55 @@ public class CompraServiceImpl implements CompraService {
 
         }
         return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap) {
+        log.info("Dentro do metodo getPdf : {}", requestMap);
+        try {
+            //byte tamanho 0
+            byte[] byteArray = new byte[0];
+
+            if (!requestMap.containsKey("uuid") && validateRequestMap(requestMap))
+                return new ResponseEntity<>(byteArray, HttpStatus.BAD_REQUEST);
+
+            String caminhoArquivo = CafeConstants.LOCAL_LOJA_NFE + "\\" + (String) requestMap.get("uuid") + ".pdf";
+
+            if (CafeUtils.isArquivoExiste(caminhoArquivo)) {
+                // Obtém os bytes do arquivo PDF e atribui ao array de bytes
+                byteArray = getByteArray(caminhoArquivo);
+
+                return new ResponseEntity<>(byteArray, HttpStatus.OK);
+            } else {
+                requestMap.put("isGenerate", false);
+                log.info("GERANDO UM NOVO ARQUIVO PDF : {}", requestMap.get("uuid"));
+                gerarRelatorio(requestMap);
+                byteArray = getByteArray(caminhoArquivo);
+                return new ResponseEntity<>(byteArray, HttpStatus.OK);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+
+    // Método privado para obter os bytes do arquivo PDF
+    private byte[] getByteArray(String caminhoArquivo) throws Exception {
+        // Cria um objeto File com base no caminho do arquivo PDF
+        File arquivoInicial = new File(caminhoArquivo);
+
+        // Abre um fluxo de entrada para ler o arquivo PDF
+        InputStream targetStream = new FileInputStream(arquivoInicial);
+
+        // Lê os bytes do fluxo de entrada e armazena no array de bytes
+        byte[] byteArray = IOUtils.toByteArray(targetStream);
+
+        // Fecha o fluxo de entrada
+        targetStream.close();
+
+        // Retorna o array de bytes contendo o conteúdo do arquivo PDF
+        return byteArray;
     }
 
 }
