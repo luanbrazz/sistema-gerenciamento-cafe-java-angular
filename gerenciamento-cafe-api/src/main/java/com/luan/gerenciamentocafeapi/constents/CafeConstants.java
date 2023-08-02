@@ -31,4 +31,6 @@ public class CafeConstants {
     public static final String DADOS_NAO_ENCONTRADO = "Dados requeridos não preenchidos";
     public static final String LOCAL_LOJA_NFE = "D:\\Repositorios de Sistemas - cursos\\projetos-pessoais\\pdf-nota-fiscal-sistema-cafe";
     public static final String TITULO = "Sistema de Gerenciamento de Café";
+    public static final String DELETADO_SUCESSO = "A compra foi deletada com sucesso!";
+    public static final String COMPRA_NOTFOUND = "Compra não encontrada no banco de dados!";
 }

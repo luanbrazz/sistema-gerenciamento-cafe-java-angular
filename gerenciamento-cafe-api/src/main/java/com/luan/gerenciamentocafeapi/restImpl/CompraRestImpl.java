@@ -48,4 +48,14 @@ public class CompraRestImpl implements CompraRest {
         }
         return null;
     }
+
+    @Override
+    public ResponseEntity<String> deleteCompra(Integer id) {
+        try {
+            return compraService.deleteCompra(id);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -252,7 +253,6 @@ public class CompraServiceImpl implements CompraService {
         return null;
     }
 
-
     // Método privado para obter os bytes do arquivo PDF
     private byte[] getByteArray(String caminhoArquivo) throws Exception {
         // Cria um objeto File com base no caminho do arquivo PDF
@@ -269,6 +269,22 @@ public class CompraServiceImpl implements CompraService {
 
         // Retorna o array de bytes contendo o conteúdo do arquivo PDF
         return byteArray;
+    }
+
+    @Override
+    public ResponseEntity<String> deleteCompra(Integer id) {
+        try {
+            Optional optional = compraDao.findById(id);
+            if (!optional.isEmpty()) {
+                compraDao.deleteById(id);
+                return CafeUtils.getResponseEntity(CafeConstants.DELETADO_SUCESSO, HttpStatus.OK);
+            } else {
+                return CafeUtils.getResponseEntity(CafeConstants.COMPRA_NOTFOUND, HttpStatus.OK);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

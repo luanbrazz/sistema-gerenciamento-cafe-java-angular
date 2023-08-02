@@ -13,4 +13,6 @@ public interface CompraService {
 
 
     ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap);
+
+    ResponseEntity<String> deleteCompra(Integer id);
 }
