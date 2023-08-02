@@ -7,6 +7,10 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.io.Serializable;
 
+@NamedQuery(name = "Compra.getAllCompra", query = "select c from Compra c order by c.id desc")
+
+@NamedQuery(name = "Compra.getCompraByUsername", query = "select c from Compra c where c.criadoPor=:username order by c.id desc")
+
 @Data
 @Entity
 @DynamicInsert

@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -110,6 +112,7 @@ public class CompraServiceImpl implements CompraService {
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+
     // Método para adicionar as linhas na tabela do PDF a partir de um Map de dados
     private void addLinhasNaTabela(PdfPTable table, Map<String, Object> dados) {
         log.info("Dentro do metodo addLinhasNaTabela");
@@ -200,6 +203,18 @@ public class CompraServiceImpl implements CompraService {
                 requestMap.containsKey("pagamento") &&
                 requestMap.containsKey("totalCompra") &&
                 requestMap.containsKey("detalheProduto");
+    }
+
+    @Override
+    public ResponseEntity<List<Compra>> getCompra() {
+        List<Compra> lista = new ArrayList<>();
+        if (jwtFilter.isAdmin()) {
+            lista = compraDao.getAllCompra();
+        } else {
+            lista = compraDao.getCompraByUsername(jwtFilter.getUsuarioAtual());
+
+        }
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
 }
