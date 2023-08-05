@@ -1,0 +1,87 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row">
+    <span>Inscreva-se</span>
+    <span class="spacer"></span>
+    <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+      <mat-icon class="mat-18">close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="signupForm">
+    <div fxFlex fxLayout="column">
+      <mat-form-field appearance="standard" fxFlex>
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" required />
+        <mat-error *ngIf="
+            signupForm.controls.nome.touched && signupForm.controls.nome.invalid
+          ">
+          <span *ngIf="signupForm.controls.nome.errors.required">Esse campo é requerido</span>
+          <span *ngIf="signupForm.controls.nome.errors.pattern">Esse campo está inválido</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" fxFlex>
+        <mat-label>E-mail:</mat-label>
+        <input matInput formControlName="email" required />
+        <mat-error *ngIf="
+            signupForm.controls.email.touched &&
+            signupForm.controls.email.invalid
+          ">
+          <span *ngIf="signupForm.controls.email.errors.required">Esse campo é requerido</span>
+          <span *ngIf="signupForm.controls.email.errors.pattern">Esse campo está inválido</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" fxFlex>
+        <mat-label>Numero de Contato:</mat-label>
+        <input matInput formControlName="numeroContato" required />
+        <mat-error *ngIf="
+            signupForm.controls.numeroContato.touched &&
+            signupForm.controls.numeroContato.invalid
+          ">
+          <span *ngIf="signupForm.controls.numeroContato.errors.required">Esse campo é requerido</span>
+          <span *ngIf="signupForm.controls.numeroContato.errors.pattern">Esse campo está inválido</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" fxFlex>
+        <mat-label>Senha:</mat-label>
+        <input matInput formControlName="senha" [type]="getTipoSenha()" required />
+        <button type="button" mat-icon-button matSuffix (click)="alternarTipoSenha()"
+          [attr.aria-label]="senha ? 'Ocultar senha' : 'Exibir senha'" [attr.aria-pressed]="senha">
+          <mat-icon>{{ senha ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="signupForm.controls.senha.touched && signupForm.controls.senha.invalid">
+          <span *ngIf="signupForm.controls.senha.errors?.required">Esse campo é requerido</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" fxFlex>
+        <mat-label>Confirme a Senha:</mat-label>
+        <input matInput formControlName="confirmaSenha" [type]="getTipoConfirmaSenha()" required />
+        <button type="button" mat-icon-button matSuffix (click)="alternarTipoConfirmaSenha()"
+          [attr.aria-label]="confirmaSenha ? 'Ocultar senha' : 'Exibir senha'" [attr.aria-pressed]="confirmaSenha">
+          <mat-icon>{{ confirmaSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="signupForm.controls.confirmaSenha.touched && signupForm.controls.senha.invalid">
+          <span *ngIf="signupForm.controls.confirmaSenha.errors?.required">Esse campo é requerido</span>
+        </mat-error>
+        <mat-hint *ngIf="validarCadastro() && !(signupForm.controls.confirmaSenha.invalid)">
+          <span>Nova senha e Confirmar senha não correspondem.</span>
+        </mat-hint>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+    [disabled]="validarCadastro() || !(signupForm.valid && signupForm.dirty)" class="custom-button"
+    matTooltip="Enviar Formulário">
+    <mat-icon>airplanemode_active</mat-icon> Inscrever-se
+  </button>
+
+  <button mat-raised-button color="warn" mat-dialog-close><mat-icon>cancel</mat-icon>Fechar</button>
+</mat-dialog-actions>
