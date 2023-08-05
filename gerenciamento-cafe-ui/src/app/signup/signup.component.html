@@ -11,41 +11,37 @@
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="signupForm">
     <div fxFlex fxLayout="column">
+      <!-- Nome -->
       <mat-form-field appearance="standard" fxFlex>
         <mat-label>Nome</mat-label>
         <input matInput formControlName="nome" required />
-        <mat-error *ngIf="
-            signupForm.controls.nome.touched && signupForm.controls.nome.invalid
-          ">
-          <span *ngIf="signupForm.controls.nome.errors.required">Esse campo é requerido</span>
-          <span *ngIf="signupForm.controls.nome.errors.pattern">Esse campo está inválido</span>
+        <mat-error *ngIf="exibirErro('nome')">
+          <span *ngIf="signupForm.controls.nome.errors?.required">Esse campo é requerido</span>
+          <span *ngIf="signupForm.controls.nome.errors?.pattern">Esse campo está inválido</span>
         </mat-error>
       </mat-form-field>
 
+      <!-- Email -->
       <mat-form-field appearance="standard" fxFlex>
         <mat-label>E-mail:</mat-label>
         <input matInput formControlName="email" required />
-        <mat-error *ngIf="
-            signupForm.controls.email.touched &&
-            signupForm.controls.email.invalid
-          ">
-          <span *ngIf="signupForm.controls.email.errors.required">Esse campo é requerido</span>
-          <span *ngIf="signupForm.controls.email.errors.pattern">Esse campo está inválido</span>
+        <mat-error *ngIf="exibirErro('email')">
+          <span *ngIf="signupForm.controls.email.errors?.required">Esse campo é requerido</span>
+          <span *ngIf="signupForm.controls.email.errors?.pattern">Esse campo está inválido</span>
         </mat-error>
       </mat-form-field>
 
+      <!-- Numero de Contato -->
       <mat-form-field appearance="standard" fxFlex>
         <mat-label>Numero de Contato:</mat-label>
         <input matInput formControlName="numeroContato" required />
-        <mat-error *ngIf="
-            signupForm.controls.numeroContato.touched &&
-            signupForm.controls.numeroContato.invalid
-          ">
-          <span *ngIf="signupForm.controls.numeroContato.errors.required">Esse campo é requerido</span>
-          <span *ngIf="signupForm.controls.numeroContato.errors.pattern">Esse campo está inválido</span>
+        <mat-error *ngIf="exibirErro('numeroContato')">
+          <span *ngIf="signupForm.controls.numeroContato.errors?.required">Esse campo é requerido</span>
+          <span *ngIf="signupForm.controls.numeroContato.errors?.pattern">Esse campo está inválido</span>
         </mat-error>
       </mat-form-field>
 
+      <!-- Senha -->
       <mat-form-field appearance="standard" fxFlex>
         <mat-label>Senha:</mat-label>
         <input matInput formControlName="senha" [type]="getTipoSenha()" required />
@@ -53,11 +49,12 @@
           [attr.aria-label]="senha ? 'Ocultar senha' : 'Exibir senha'" [attr.aria-pressed]="senha">
           <mat-icon>{{ senha ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
-        <mat-error *ngIf="signupForm.controls.senha.touched && signupForm.controls.senha.invalid">
+        <mat-error *ngIf="exibirErro('senha')">
           <span *ngIf="signupForm.controls.senha.errors?.required">Esse campo é requerido</span>
         </mat-error>
       </mat-form-field>
 
+      <!-- Confirme a Senha -->
       <mat-form-field appearance="standard" fxFlex>
         <mat-label>Confirme a Senha:</mat-label>
         <input matInput formControlName="confirmaSenha" [type]="getTipoConfirmaSenha()" required />
@@ -65,7 +62,7 @@
           [attr.aria-label]="confirmaSenha ? 'Ocultar senha' : 'Exibir senha'" [attr.aria-pressed]="confirmaSenha">
           <mat-icon>{{ confirmaSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
-        <mat-error *ngIf="signupForm.controls.confirmaSenha.touched && signupForm.controls.senha.invalid">
+        <mat-error *ngIf="exibirErro('confirmaSenha')">
           <span *ngIf="signupForm.controls.confirmaSenha.errors?.required">Esse campo é requerido</span>
         </mat-error>
         <mat-hint *ngIf="validarCadastro() && !(signupForm.controls.confirmaSenha.invalid)">
@@ -75,6 +72,7 @@
     </div>
   </form>
 </mat-dialog-content>
+
 
 <mat-dialog-actions>
   <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"

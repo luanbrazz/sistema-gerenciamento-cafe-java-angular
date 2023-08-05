@@ -76,6 +76,11 @@ export class SignupComponent implements OnInit {
     })
   }
 
+  exibirErro(formControlName: string) {
+    const control = this.signupForm.get(formControlName);
+    return control?.touched && control?.invalid;
+  }
+
   getTipoSenha() {
     return this.senha ? 'password' : 'text';
   }
