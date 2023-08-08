@@ -16,6 +16,7 @@ import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { MaterialModule } from './shared/material-module';
 import { SharedModule } from './shared/shared.module';
 import { SignupComponent } from './signup/signup.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 //ESTILO DO SPINNER
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
@@ -37,7 +38,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FullComponent,
     AppHeaderComponent,
     AppSidebarComponent,
-    SignupComponent
+    SignupComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
