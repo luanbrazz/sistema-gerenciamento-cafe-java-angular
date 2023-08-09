@@ -16,4 +16,8 @@ export class UsuarioService {
   signup(dados: any) {
     return this.httpClient.post(this.url + "/usuario/signup", dados, { headers: new HttpHeaders().set('Content-Type', 'application/json') })
   }
+
+  forgotPassword(dados: any) {
+    return this.httpClient.post(this.url + "/usuario/forgotPassword", dados, { headers: new HttpHeaders().set('Content-Type', 'application/json') })
+  }
 }
