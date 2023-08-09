@@ -8,8 +8,15 @@
     </a>
     <ul>
       <li>
-        <a (click)="openModalInscricao()">Inscreva-se&nbsp;</a>
-        <a (click)="openModalEsqueciaASenha()">&nbsp;Esqueceu a senha?</a>
+        <a (click)="openModalLogin()">
+          <mat-icon>login</mat-icon> Login
+        </a>
+        <a (click)="openModalInscricao()">
+          <mat-icon>person_add</mat-icon> Inscreva-se
+        </a>
+        <a (click)="openModalEsqueciaASenha()">
+          <mat-icon>lock_open</mat-icon> Esqueceu a senha?
+        </a>
       </li>
     </ul>
   </nav>
