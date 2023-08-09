@@ -242,8 +242,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     public ResponseEntity<String> forgotPassword(Map<String, String> requestMap) {
         try {
             Usuario usuario = usuarioDao.findByEmail(requestMap.get("email"));
-            if (!Objects.isNull(usuario) && !Strings.isNullOrEmpty(usuario.getEmail()))
+
+            if (usuario == null) {
+                return CafeUtils.getResponseEntity("Usuário não encontrado no banco de dados.", HttpStatus.NOT_FOUND);
+            }
+
+            if (!Strings.isNullOrEmpty(usuario.getEmail())) {
                 emailUtils.forgotMail(usuario.getEmail(), CafeConstants.CRED_GERENC_CAFE, usuario.getSenha());
+            }
 
             return CafeUtils.getResponseEntity(CafeConstants.VERIFICAR_EMAIL, HttpStatus.OK);
 
@@ -252,5 +258,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return CafeUtils.getResponseEntity(CafeConstants.ALGO_DEU_ERRADO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 
 }
