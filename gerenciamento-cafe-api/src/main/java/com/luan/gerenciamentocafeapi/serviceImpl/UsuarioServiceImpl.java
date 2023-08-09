@@ -244,7 +244,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             Usuario usuario = usuarioDao.findByEmail(requestMap.get("email"));
 
             if (usuario == null) {
-                return CafeUtils.getResponseEntity("Usuário não encontrado no banco de dados.", HttpStatus.NOT_FOUND);
+                return CafeUtils.getResponseEntity(CafeConstants.NENHUM_RESULTADO, HttpStatus.NOT_FOUND);
             }
 
             if (!Strings.isNullOrEmpty(usuario.getEmail())) {

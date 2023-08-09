@@ -33,4 +33,5 @@ public class CafeConstants {
     public static final String TITULO = "Sistema de Gerenciamento de Café";
     public static final String DELETADO_SUCESSO = "A compra foi deletada com sucesso!";
     public static final String COMPRA_NOTFOUND = "Compra não encontrada no banco de dados!";
+    public static final String NENHUM_RESULTADO = "Sua pesquisa não retornou nenhum resultado. Tente novamente com outras informações.";
 }
