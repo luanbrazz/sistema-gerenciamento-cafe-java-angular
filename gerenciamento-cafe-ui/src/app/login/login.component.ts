@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', resp.token);
       this.router.navigate(['/cafe/dashboard'])
     }, (error) => {
+      this.ngxUiLoaderService.stop();
       console.log("Erro ao fazer o login", error);
       if (error.error?.message) {
         this.respostaMensagem = error.error?.message;
