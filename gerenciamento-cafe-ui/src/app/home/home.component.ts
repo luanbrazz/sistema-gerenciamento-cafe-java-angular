@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { LoginComponent } from '../login/login.component';
+import { UsuarioService } from '../services/usuario.service';
 import { SignupComponent } from '../signup/signup.component';
+import { error } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +16,15 @@ import { SignupComponent } from '../signup/signup.component';
 export class HomeComponent implements OnInit {
 
   // MatDialog, usada para abrir diálogos
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
+    this.usuarioService.checkToken().subscribe((resp: any) => {
+      console.log("token checadoooooo", resp)
+      this.router.navigate(['/cafe/dashboard'])
+    }, (error: any) => {
+      console.log('erro no token', error);
+    })
   }
   // lidar com a ação de inscrição
   // Método para lidar com a ação de inscrição, abrindo um diálogo de inscrição

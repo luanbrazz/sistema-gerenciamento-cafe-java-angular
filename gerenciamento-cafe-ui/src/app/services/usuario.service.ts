@@ -24,4 +24,9 @@ export class UsuarioService {
   login(dados: any) {
     return this.httpClient.post(this.url + "/usuario/login", dados, { headers: new HttpHeaders().set('Content-Type', 'application/json') })
   }
+// Função para verificar o token de autorização do usuário
+  // A função utiliza o método GET do HttpClient para enviar uma requisição para a rota de verificação do token no servidor
+  checkToken() {
+    return this.httpClient.get(this.url + "/usuario/checkToken")
+  }
 }

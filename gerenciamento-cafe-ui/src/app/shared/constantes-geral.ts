@@ -2,6 +2,8 @@ export class ConstantesGeral {
 
   public static erroGenerico: string = "Ops! Algo deu errado :( . Por favor, tente novamente mais tarde";
 
+  public static naoAutorizado: string = "Você não tem autorização para acessar esta página.";
+
   // [a-zA-Z0-9 ]* expressão regular que permite letras maiúsculas, letras minúsculas, números e espaços em branco.
   public static nomeRegex: string = "[a-zA-Z0-9 ]*";
 
@@ -14,4 +16,5 @@ export class ConstantesGeral {
   public static numeroContatoRegex: string = "^[e0-9]{11,11}$";
 
   public static error: string = "error";
+
 }

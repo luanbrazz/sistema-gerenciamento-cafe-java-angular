@@ -1,0 +1,38 @@
+<body>
+  <mat-card>
+    <b><span>Dashboard</span></b>
+  </mat-card>
+  <br>
+  <div class="row">
+    <!-- Column -->
+    <div class="column">
+      <div class="card">
+        <div class="container">
+          <h2 class="title">Total de Categoria Cadastrada</h2>
+          <h1 class="title">{{dados?.categoria}}</h1>
+          <p><button class="button" [routerLink]="['cafe/categoria']">Categorias</button></p>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="column">
+      <div class="card">
+        <div class="container">
+          <h2 class="title">Total de Produto Cadastrado</h2>
+          <h1 class="title">{{dados?.produto}}</h1>
+          <p><button class="button" [routerLink]="['cafe/produto']">Produtos</button></p>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="column">
+      <div class="card">
+        <div class="container">
+          <h2 class="title">Total de Categoria Cadastrada</h2>
+          <h1 class="title">{{dados?.compra}}</h1>
+          <p><button class="button" [routerLink]="['cafe/compra']">Vendas Realizadas</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

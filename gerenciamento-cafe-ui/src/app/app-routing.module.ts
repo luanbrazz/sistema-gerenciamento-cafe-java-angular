@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 
 // Importa o componente FullComponent.
 import { FullComponent } from './layouts/full/full.component';
+import { RouteGuardService } from './services/route-guard.service';
 
 // Define uma constante chamada "routes" que contém a configuração das rotas da aplicação.
 const routes: Routes = [
@@ -32,12 +33,20 @@ const routes: Routes = [
         path: '',
         loadChildren:
           () => import('./material-component/material.module').then(m => m.MaterialComponentsModule),
+        canActivate: [RouteGuardService],
+        data: {
+          expectedRole: ['admin', 'usuario']
+        }
       },
 
       // Rota lazy-loaded que carrega o módulo DashboardModule quando "cafe/dashboard" é acessada.
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        canActivate: [RouteGuardService],
+        data: {
+          expectedRole: ['admin', 'usuario']
+        }
       }
     ]
   },
