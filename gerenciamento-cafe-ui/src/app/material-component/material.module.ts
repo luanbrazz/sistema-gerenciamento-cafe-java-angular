@@ -1,30 +1,36 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { CdkTableModule } from '@angular/cdk/table';
+// Importações necessárias do Angular
+import { CdkTableModule } from '@angular/cdk/table'; // Importa o módulo CdkTableModule para tabelas
+import { CommonModule } from '@angular/common'; // Importa o módulo CommonModule
+import { HttpClientModule } from '@angular/common/http'; // Importa o módulo HttpClientModule para chamadas HTTP
+import { NgModule } from '@angular/core'; // Importa a classe NgModule para criar um módulo
+import { FlexLayoutModule } from '@angular/flex-layout'; // Importa o módulo FlexLayoutModule para layout flexível
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importa módulos para lidar com formulários
+import { RouterModule } from '@angular/router'; // Importa o módulo RouterModule para lidar com roteamento
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
+// Importações personalizadas
+import { MaterialModule } from '../shared/material-module'; // Importa um módulo MaterialModule personalizado
+import { AlterarSenhaComponent } from './dialog/alterar-senha/alterar-senha.component'; // Importa um componente personalizado
+import { ConfirmacaoComponent } from './dialog/confirmacao/confirmacao.component'; // Importa um componente personalizado
+import { ViewBillProductsComponent } from './dialog/view-bill-products/view-bill-products.component'; // Importa um componente personalizado
+import { MaterialRoutes } from './material.routing'; // Importa as rotas do módulo
 
-import { MaterialRoutes } from './material.routing';
-import { MaterialModule } from '../shared/material-module';
-import { ViewBillProductsComponent } from './dialog/view-bill-products/view-bill-products.component';
-
+// Decoração do módulo MaterialComponentsModule
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule.forChild(MaterialRoutes),
-    MaterialModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    CdkTableModule
+    CommonModule, // Importa o módulo CommonModule para funcionalidades comuns
+    RouterModule.forChild(MaterialRoutes), // Define as rotas específicas do módulo
+    MaterialModule, // Importa o módulo MaterialModule personalizado
+    HttpClientModule, // Importa o módulo HttpClientModule para chamadas HTTP
+    FormsModule, // Importa o módulo FormsModule para lidar com formulários
+    ReactiveFormsModule, // Importa o módulo ReactiveFormsModule para lidar com formulários reativos
+    FlexLayoutModule, // Importa o módulo FlexLayoutModule para layout flexível
+    CdkTableModule // Importa o módulo CdkTableModule para tabelas
   ],
-  providers: [],
+  providers: [], // Define os provedores de serviços
   declarations: [
-    ViewBillProductsComponent
+    ViewBillProductsComponent, // Declara o componente ViewBillProductsComponent
+    ConfirmacaoComponent, // Declara o componente ConfirmacaoComponent
+    AlterarSenhaComponent // Declara o componente AlterarSenhaComponent
   ]
 })
-export class MaterialComponentsModule {}
+export class MaterialComponentsModule { } // Exporta a classe do módulo MaterialComponentsModule

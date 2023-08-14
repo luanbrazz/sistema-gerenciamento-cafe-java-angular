@@ -17,4 +17,6 @@ export class ConstantesGeral {
 
   public static error: string = "error";
 
+  public static success: string = "success";
+
 }
