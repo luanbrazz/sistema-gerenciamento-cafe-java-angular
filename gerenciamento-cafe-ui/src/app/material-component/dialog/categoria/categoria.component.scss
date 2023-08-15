@@ -1,0 +1,6 @@
+/* Seletor que direciona para um componente mat-toolbar do Angular Material */
+.mat-toolbar {
+  margin: -24px; /* Sobrescreve a margem padrão do componente, ajustando para -24px em todas as direções */
+  margin-bottom: 10px; /* Especificamente para a margem inferior, redefine para 10px */
+  width: auto; /* Define a largura do componente para ajustar automaticamente de acordo com o conteúdo */
+}

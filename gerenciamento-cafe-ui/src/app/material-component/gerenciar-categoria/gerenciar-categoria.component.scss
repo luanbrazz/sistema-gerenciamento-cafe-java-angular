@@ -1,0 +1,16 @@
+.float-right {
+  float: right; // Alinha o elemento à direita do seu contêiner
+}
+
+mat-card {
+  padding: 20px; // Adiciona um padding de 20 pixels em todas as direções dentro do componente <mat-card>
+}
+
+table {
+  width: 100%; // Define a largura das tabelas para ocupar 100% da largura do seu contêiner
+}
+
+::ng-deep .highlight {
+  color: white; // Define a cor do texto dos elementos com a classe 'highlight' para branco
+  background: #7b1fa2; // Define a cor de fundo dos elementos com a classe 'highlight' para um tom de roxo (#7b1fa2)
+}

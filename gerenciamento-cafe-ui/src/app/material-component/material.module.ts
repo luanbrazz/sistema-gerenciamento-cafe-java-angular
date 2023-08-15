@@ -12,7 +12,11 @@ import { MaterialModule } from '../shared/material-module'; // Importa um módul
 import { AlterarSenhaComponent } from './dialog/alterar-senha/alterar-senha.component'; // Importa um componente personalizado
 import { ConfirmacaoComponent } from './dialog/confirmacao/confirmacao.component'; // Importa um componente personalizado
 import { ViewBillProductsComponent } from './dialog/view-bill-products/view-bill-products.component'; // Importa um componente personalizado
-import { MaterialRoutes } from './material.routing'; // Importa as rotas do módulo
+import { MaterialRoutes } from './material.routing';
+import { GerenciarCategoriaComponent } from './gerenciar-categoria/gerenciar-categoria.component';
+import { CategoriaComponent } from './dialog/categoria/categoria.component'; // Importa as rotas do módulo
+import { MatDialogModule } from '@angular/material/dialog';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // Decoração do módulo MaterialComponentsModule
 @NgModule({
@@ -24,13 +28,15 @@ import { MaterialRoutes } from './material.routing'; // Importa as rotas do mód
     FormsModule, // Importa o módulo FormsModule para lidar com formulários
     ReactiveFormsModule, // Importa o módulo ReactiveFormsModule para lidar com formulários reativos
     FlexLayoutModule, // Importa o módulo FlexLayoutModule para layout flexível
-    CdkTableModule // Importa o módulo CdkTableModule para tabelas
+    CdkTableModule, // Importa o módulo CdkTableModule para tabelas
+    MatDialogModule
   ],
   providers: [], // Define os provedores de serviços
   declarations: [
     ViewBillProductsComponent, // Declara o componente ViewBillProductsComponent
     ConfirmacaoComponent, // Declara o componente ConfirmacaoComponent
-    AlterarSenhaComponent // Declara o componente AlterarSenhaComponent
-  ]
+    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent // Declara o componente AlterarSenhaComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MaterialComponentsModule { } // Exporta a classe do módulo MaterialComponentsModule

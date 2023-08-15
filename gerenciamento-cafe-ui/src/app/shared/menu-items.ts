@@ -11,7 +11,8 @@ export interface Menu {
 
 // Declaração do array de itens de menu
 const MENUITEMS = [
-  { state: 'dashboard', nome: 'Dashboard', type: 'link', icon: 'dashboard', role: '' }
+  { state: 'dashboard', nome: 'Dashboard', type: 'link', icon: 'dashboard', role: '' },
+  { state: 'categoria', nome: 'Gerenciar Categorias', type: 'link', icon: 'category', role: 'admin' }
 ]
 
 // Serviço injetável para fornecer itens de menu

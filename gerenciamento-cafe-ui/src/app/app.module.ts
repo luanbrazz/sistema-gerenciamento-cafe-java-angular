@@ -19,6 +19,7 @@ import { TokenInterceptorInterceptor } from './services/token-interceptor.interc
 import { MaterialModule } from './shared/material-module';
 import { SharedModule } from './shared/shared.module';
 import { SignupComponent } from './signup/signup.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 //ESTILO DO SPINNER
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
@@ -53,6 +54,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MaterialModule,
     FlexLayoutModule,
     SharedModule,
+    MatDialogModule,
     HttpClientModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
@@ -63,16 +65,16 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 
     // Configurando o provedor de interceptores HTTP:
     {
-        // Indicando que estamos fornecendo um interceptor de HTTP.
-        provide: HTTP_INTERCEPTORS,
+      // Indicando que estamos fornecendo um interceptor de HTTP.
+      provide: HTTP_INTERCEPTORS,
 
-        // Especificando a classe do interceptor que será injetada.
-        useClass: TokenInterceptorInterceptor,
+      // Especificando a classe do interceptor que será injetada.
+      useClass: TokenInterceptorInterceptor,
 
-        // Informando que pode haver vários interceptores.
-        multi: true
+      // Informando que pode haver vários interceptores.
+      multi: true
     }
-],
+  ],
 
   bootstrap: [AppComponent]
 })
