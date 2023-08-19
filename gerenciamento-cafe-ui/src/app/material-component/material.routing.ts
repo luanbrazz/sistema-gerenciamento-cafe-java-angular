@@ -9,6 +9,7 @@ import { GerenciarCategoriaComponent } from './gerenciar-categoria/gerenciar-cat
 
 // Importa o serviço 'RouteGuardService'
 import { RouteGuardService } from '../services/route-guard.service';
+import { GerenciarProdutoComponent } from './gerenciar-produto/gerenciar-produto.component';
 
 // Exporta uma constante chamada 'MaterialRoutes' que é um array de rotas
 export const MaterialRoutes: Routes = [
@@ -18,6 +19,14 @@ export const MaterialRoutes: Routes = [
     canActivate: [RouteGuardService],  // Especifica que 'RouteGuardService' será usado para proteger esta rota
     data: {  // Define metadados adicionais para esta rota
       expectedRole: ['admin']  // Especifica que se espera que o usuário tenha a role 'admin' para acessar esta rota
+    }
+  },
+  {
+    path: 'produto',
+    component: GerenciarProdutoComponent,
+    canActivate: [RouteGuardService],
+    data: {
+      expectedRole: ['admin']
     }
   }
 ];

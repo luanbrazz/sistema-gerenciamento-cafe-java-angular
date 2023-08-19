@@ -20,6 +20,7 @@ import { MaterialModule } from './shared/material-module';
 import { SharedModule } from './shared/shared.module';
 import { SignupComponent } from './signup/signup.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 //ESTILO DO SPINNER
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
@@ -43,7 +44,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AppSidebarComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    LoginComponent
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     SharedModule,
     MatDialogModule,
     HttpClientModule,
+    MatTableModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [

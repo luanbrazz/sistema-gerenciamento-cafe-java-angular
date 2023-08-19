@@ -16,10 +16,7 @@ export class ConfirmacaoComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any) { }
 
   ngOnInit(): void {
-    // Verifica se há dados de confirmação no diálogo
-    if (this.dialogData && this.dialogData.confirmacao) {
-      this.detalhes = this.dialogData; // Atribui os detalhes do diálogo à propriedade 'detalhes'
-    }
+    this.detalhes = this.dialogData || {};
   }
 
   // Método chamado quando a ação de mudança é acionada

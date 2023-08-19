@@ -23,7 +23,7 @@ export class CategoriaComponent implements OnInit { // Implementa a interface On
 
   dialogAction: any = "Adicionar"; // Define uma propriedade para a ação do diálogo
 
-  acao: any = "Adicionar" // Define a ação que será usada no botão do formulário
+  action: any = "Adicionar" // Define a ação que será usada no botão do formulário
 
   respostaMensagem: any; // Define uma propriedade para armazenar a mensagem de resposta do servidor
 
@@ -46,7 +46,7 @@ export class CategoriaComponent implements OnInit { // Implementa a interface On
     // Verifica se a ação passada para o diálogo é 'Editar'
     if (this.dialogData.action === 'Editar') {
       this.dialogAction = "Editar";
-      this.acao = "Atualizar";
+      this.action = "Atualizar";
       // Preenche o formulário com os dados da categoria que está sendo editada
       this.categoriaForm.patchValue(this.dialogData.data);
     }

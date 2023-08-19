@@ -1,0 +1,47 @@
+// A classe .float-right é usada para fazer um elemento flutuar à direita do seu contêiner.
+.float-right {
+  float: right;
+}
+
+// Estiliza todos os elementos <mat-card> (um componente do Angular Material que serve como um content container).
+// Aqui, estamos definindo um padding (espaçamento interno) de 20 pixels.
+mat-card {
+  padding: 20px;
+}
+
+// Define a largura das tabelas para ocupar 100% da largura do seu contêiner pai.
+table {
+  width: 100%;
+}
+
+// A classe .action-button é usada para estilizar os botões que desencadeiam ações.
+// Define uma margem à direita de 8 pixels, criando espaço entre este botão e o próximo elemento à sua direita.
+.action-button {
+  margin-right: 8px;
+}
+
+// A classe .action-slide-toggle é usada para estilizar um componente de alternância (ex: um switch).
+// Define uma margem à esquerda de 8 pixels, criando espaço entre este componente de alternância e o próximo elemento à sua esquerda.
+.action-slide-toggle {
+  margin-left: 8px;
+}
+
+// A classe .action-link é usada para estilizar um conjunto de ações que são apresentadas como links.
+// Define este elemento como um container flexível, o que permite alinhar seus filhos de forma mais fácil.
+// O valor "center" para align-items significa que os itens filhos serão centralizados verticalmente.
+.action-link {
+  display: flex;
+  align-items: center;
+}
+
+// Para todos os filhos diretos do elemento com a classe .action-link,
+// define uma margem à direita de 8 pixels, criando espaço entre cada filho e o próximo elemento à sua direita.
+.action-link > * {
+  margin-right: 8px;
+}
+
+// Para o último filho direto do elemento com a classe .action-link,
+// remove a margem à direita, garantindo que o último item não tenha espaço extra à sua direita.
+.action-link > :last-child {
+  margin-right: 0;
+}

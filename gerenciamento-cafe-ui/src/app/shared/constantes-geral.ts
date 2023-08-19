@@ -15,8 +15,10 @@ export class ConstantesGeral {
   // [e0-9]{10,10}$ expressão regular que valida um número de contato. Essa expressão regular permite apenas dígitos numéricos exatamente com 10 caracteres.
   public static numeroContatoRegex: string = "^[e0-9]{11,11}$";
 
+  // public static precoRegex: string = "^-?[0-9]+(\\.[0-9]{1,2})?$";
+  public static precoRegex: string = "^[0-9]+$";
+
   public static error: string = "error";
 
   public static success: string = "success";
-
 }

@@ -1,0 +1,16 @@
+// A classe .mat-toolbar é usada para estilizar o componente <mat-toolbar> do Angular Material,
+// que é um container para cabeçalhos, títulos ou ações de navegação.
+// Este estilo define uma margem de -24 pixels em todos os lados, exceto na parte inferior, que tem uma margem de 10 pixels.
+// A largura é definida como 'auto', o que significa que ela será baseada no conteúdo interno.
+.mat-toolbar {
+  margin: -24px;
+  margin-bottom: 10px;
+  width: auto;
+}
+
+// O elemento <mat-form-field> é um componente do Angular Material que é usado para agrupar
+// um <input>, <select> ou <textarea> com uma <mat-label>, <mat-error> e outras mensagens.
+// Este estilo define um padding (espaçamento interno) de 5 pixels para todos os lados do elemento <mat-form-field>.
+mat-form-field {
+  padding: 5px;
+}

@@ -17,6 +17,9 @@ import { GerenciarCategoriaComponent } from './gerenciar-categoria/gerenciar-cat
 import { CategoriaComponent } from './dialog/categoria/categoria.component'; // Importa as rotas do módulo
 import { MatDialogModule } from '@angular/material/dialog';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { GerenciarProdutoComponent } from './gerenciar-produto/gerenciar-produto.component';
+import { ProdutoComponent } from './dialog/produto/produto.component';
+import { MatTableModule } from '@angular/material/table';
 
 // Decoração do módulo MaterialComponentsModule
 @NgModule({
@@ -29,13 +32,14 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     ReactiveFormsModule, // Importa o módulo ReactiveFormsModule para lidar com formulários reativos
     FlexLayoutModule, // Importa o módulo FlexLayoutModule para layout flexível
     CdkTableModule, // Importa o módulo CdkTableModule para tabelas
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
   ],
   providers: [], // Define os provedores de serviços
   declarations: [
     ViewBillProductsComponent, // Declara o componente ViewBillProductsComponent
     ConfirmacaoComponent, // Declara o componente ConfirmacaoComponent
-    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent // Declara o componente AlterarSenhaComponent
+    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent, GerenciarProdutoComponent, ProdutoComponent // Declara o componente AlterarSenhaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
