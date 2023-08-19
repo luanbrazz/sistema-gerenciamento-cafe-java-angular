@@ -1,23 +1,15 @@
-// Importando Component e OnInit de @angular/core para criar e inicializar o componente
 import { Component, OnInit } from '@angular/core';
-// Importando MatDialog e MatDialogConfig de @angular/material/dialog para trabalhar com diálogos modais
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-// Importando MatTableDataSource de @angular/material/table para manipular os dados da tabela de categorias
 import { MatTableDataSource } from '@angular/material/table';
-// Importando Router de @angular/router para trabalhar com roteamento e navegação
 import { Router } from '@angular/router';
-// Importando NgxUiLoaderService de ngx-ui-loader para controle de um loader/spinner de UI
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-// Importando CategoriaService de um caminho relativo para lidar com operações relacionadas à categoria
+import { Subscription } from 'rxjs';
 import { CategoriaService } from 'src/app/services/categoria.service';
-// Importando SnackbarService de um caminho relativo para mostrar notificações na tela
 import { SnackbarService } from 'src/app/services/snackbar.service';
-// Importando ConstantesGeral de um caminho relativo que contém constantes usadas em todo o projeto
 import { ConstantesGeral } from 'src/app/shared/constantes-geral';
-// Importando CategoriaComponent de um caminho relativo que representa uma janela de diálogo para adicionar ou editar categorias
+
 import { CategoriaComponent } from '../dialog/categoria/categoria.component';
 
-// Decorator que marca a classe como um componente e fornece metadados de configuração
 @Component({
   selector: 'app-gerenciar-categoria', // O seletor CSS que identifica este componente na template
   templateUrl: './gerenciar-categoria.component.html', // O local do arquivo HTML que é usado como template do componente
@@ -34,6 +26,9 @@ export class GerenciarCategoriaComponent implements OnInit {
 
   // Propriedade para guardar mensagens de resposta do servidor
   respostaMensagem: any;
+
+  // Array para armazenar as subscrições do componente.
+  private subscriptions: Subscription[] = [];
 
   // Construtor do componente, com várias dependências que serão injetadas
   constructor(
@@ -109,6 +104,10 @@ export class GerenciarCategoriaComponent implements OnInit {
         this.carregaDadosTabela();
       }
     });
+
+    dialogRef.componentInstance.onAdicionarCategoria.subscribe(() => {
+      this.carregaDadosTabela(); // Recarrega os dados da tabela
+    });
   }
 
   // Método para lidar com a ação de editar uma categoria existente
@@ -135,6 +134,10 @@ export class GerenciarCategoriaComponent implements OnInit {
         // Recarrega os dados da tabela se o diálogo foi fechado com um resultado positivo
         this.carregaDadosTabela();
       }
+    });
+
+    dialogRef.componentInstance.onAdicionarCategoria.subscribe(() => {
+      this.carregaDadosTabela(); // Recarrega os dados da tabela
     });
   }
 
