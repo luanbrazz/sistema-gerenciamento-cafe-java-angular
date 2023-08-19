@@ -2,10 +2,7 @@ package com.luan.gerenciamentocafeapi.rest;
 
 import com.luan.gerenciamentocafeapi.POJO.Categoria;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +14,7 @@ public interface CategoriaRest {
     ResponseEntity<String> addNewCategoria(@RequestBody(required = true) Map<String, String> requestMap);
 
     @GetMapping(path = "/get")
-    ResponseEntity<List<Categoria>> getAllCategoria(@RequestBody(required = false) String filterValue);
+    ResponseEntity<List<Categoria>> getAllCategoria(@RequestParam(name = "filterValue", required = false) String filterValue);
 
     @PostMapping(path = "/update")
     ResponseEntity<String> updateCategoria(@RequestBody(required = true) Map<String, String> requestMap);

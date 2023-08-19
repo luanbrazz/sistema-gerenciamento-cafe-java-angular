@@ -13,6 +13,8 @@ import java.io.Serializable;
 // seleciona o campo categoria da entidade Produto (representada pelo alias p) onde o campo status é igual a "true".
 // Em outras palavras, essa subconsulta recupera os IDs das categorias onde existem produtos ativos (com status igual a "true").
 // O operador IN é usado para verificar se o id da categoria atual (c.id) está presente na lista de IDs retornada pela subconsulta.
+
+// Ela retorna todas as entidades de Categoria cujo id está presente na lista de categorias associadas a produtos que têm um status igual a 'true'. Em outras palavras, ela está buscando todas as categorias que estão associadas a pelo menos um produto cujo status é 'true'.
 @NamedQuery(name = "Categoria.getAllCategoria", query = "select c from Categoria c where c.id in  (select p.categoria from Produto p where p.status='true')")
 
 @Data
