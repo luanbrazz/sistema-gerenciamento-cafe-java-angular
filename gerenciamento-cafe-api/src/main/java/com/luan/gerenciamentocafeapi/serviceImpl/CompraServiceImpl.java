@@ -124,7 +124,9 @@ public class CompraServiceImpl implements CompraService {
         log.info("Dentro do metodo addLinhasNaTabela");
         table.addCell((String) dados.get("nome"));
         table.addCell((String) dados.get("categoria"));
-        table.addCell((String) dados.get("quantidade"));
+
+//        Essa linha de código adiciona o valor da coluna "quantidade" como uma célula à tabela no formato de texto, convertendo-o para uma string antes de fazer a adição.
+        table.addCell(String.valueOf(dados.get("quantidade")));
         table.addCell(Double.toString((Double) dados.get("preco")));
         table.addCell(Double.toString((Double) dados.get("total")));
     }
