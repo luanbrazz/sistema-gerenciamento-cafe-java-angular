@@ -1,0 +1,24 @@
+// Estilo aplicado a todos os elementos 'mat-form-field', que são campos de formulário do Angular Material.
+// Adiciona um padding de 5 pixels em todos os lados do elemento.
+mat-form-field {
+  padding: 5px;
+}
+
+// Classe '.float-right' para fazer com que um elemento flutue para a direita do seu contêiner.
+// Pode ser usado para, por exemplo, alinhar um botão à direita dentro de um contêiner.
+.float-right {
+  float: right;
+}
+
+// Estilo aplicado a todas as tabelas HTML (<table>).
+// Define a largura da tabela para ocupar 100% da largura do seu contêiner pai.
+table {
+  width: 100%;
+}
+
+// Estilo aplicado a todos os elementos 'mat-card', que são cartões de interface de usuário do Angular Material.
+// Define o padding inferior do cartão para 30 pixels.
+// O '!important' é usado para garantir que este estilo tenha precedência sobre outros estilos potencialmente conflitantes.
+mat-card {
+  padding-bottom: 30px !important;
+}

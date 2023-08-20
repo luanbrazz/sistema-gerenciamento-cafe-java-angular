@@ -33,10 +33,12 @@ export class ProdutoService {
     return this.httpClient.post(`${this.url}/delete/` + id, { headers: this.headers });
   }
 
+  //ordenação
   getByCategoria(id: number) {
     return this.httpClient.get(`${this.url}/getByCategoria/` + id);
   }
 
+  //ordenação
   getProdutoById(id: number) {
     return this.httpClient.get(`${this.url}/getById/` + id);
   }

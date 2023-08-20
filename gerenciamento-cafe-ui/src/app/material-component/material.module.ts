@@ -20,6 +20,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { GerenciarProdutoComponent } from './gerenciar-produto/gerenciar-produto.component';
 import { ProdutoComponent } from './dialog/produto/produto.component';
 import { MatTableModule } from '@angular/material/table';
+import { GerenciarOrdemComponent } from './gerenciar-ordem/gerenciar-ordem.component';
 
 // Decoração do módulo MaterialComponentsModule
 @NgModule({
@@ -39,7 +40,7 @@ import { MatTableModule } from '@angular/material/table';
   declarations: [
     ViewBillProductsComponent, // Declara o componente ViewBillProductsComponent
     ConfirmacaoComponent, // Declara o componente ConfirmacaoComponent
-    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent, GerenciarProdutoComponent, ProdutoComponent // Declara o componente AlterarSenhaComponent
+    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent, GerenciarProdutoComponent, ProdutoComponent, GerenciarOrdemComponent // Declara o componente AlterarSenhaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -24,4 +24,11 @@ export class CategoriaService {
   getAllCategoria() {
     return this.httpClient.get(`${this.url}/get`);
   }
+
+  // Método 'getFilterCategoria' que não aceita parâmetros.
+  // Este método faz uma requisição GET para a URL '/get' com um parâmetro de query 'filterValue=true'
+  // para obter categorias que atendam a um determinado filtro.
+  getFilterCategoria() {
+    return this.httpClient.get(`${this.url}/get?filterValue=true`);
+  }
 }
