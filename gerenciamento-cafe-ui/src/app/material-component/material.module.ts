@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router'; // Importa o módulo RouterModul
 import { MaterialModule } from '../shared/material-module'; // Importa um módulo MaterialModule personalizado
 import { AlterarSenhaComponent } from './dialog/alterar-senha/alterar-senha.component'; // Importa um componente personalizado
 import { ConfirmacaoComponent } from './dialog/confirmacao/confirmacao.component'; // Importa um componente personalizado
-import { ViewBillProductsComponent } from './dialog/view-bill-products/view-bill-products.component'; // Importa um componente personalizado
 import { MaterialRoutes } from './material.routing';
 import { GerenciarCategoriaComponent } from './gerenciar-categoria/gerenciar-categoria.component';
 import { CategoriaComponent } from './dialog/categoria/categoria.component'; // Importa as rotas do módulo
@@ -21,6 +20,8 @@ import { GerenciarProdutoComponent } from './gerenciar-produto/gerenciar-produto
 import { ProdutoComponent } from './dialog/produto/produto.component';
 import { MatTableModule } from '@angular/material/table';
 import { GerenciarOrdemComponent } from './gerenciar-ordem/gerenciar-ordem.component';
+import { ViewCompraComponent } from './view-compra/view-compra.component';
+import { ViewCompraProdutosComponent } from './dialog/view-compra-produtos/view-compra-produtos.component';
 
 // Decoração do módulo MaterialComponentsModule
 @NgModule({
@@ -38,9 +39,8 @@ import { GerenciarOrdemComponent } from './gerenciar-ordem/gerenciar-ordem.compo
   ],
   providers: [], // Define os provedores de serviços
   declarations: [
-    ViewBillProductsComponent, // Declara o componente ViewBillProductsComponent
     ConfirmacaoComponent, // Declara o componente ConfirmacaoComponent
-    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent, GerenciarProdutoComponent, ProdutoComponent, GerenciarOrdemComponent // Declara o componente AlterarSenhaComponent
+    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent, GerenciarProdutoComponent, ProdutoComponent, GerenciarOrdemComponent, ViewCompraComponent, ViewCompraProdutosComponent // Declara o componente AlterarSenhaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

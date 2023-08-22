@@ -64,7 +64,7 @@ export class GerenciarOrdemComponent implements OnInit {
     private snackbarService: SnackbarService,
     private compraService: CompraService,
     private ngxUiLoaderService: NgxUiLoaderService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.ngxUiLoaderService.start();
@@ -166,13 +166,13 @@ export class GerenciarOrdemComponent implements OnInit {
     if (qtd > 0) {
       this.gerenciarOrdemForm.controls['total'].setValue(
         this.gerenciarOrdemForm.controls['quantidade'].value *
-          this.gerenciarOrdemForm.controls['preco'].value
+        this.gerenciarOrdemForm.controls['preco'].value
       );
     } else if (qtd != '') {
       this.gerenciarOrdemForm.controls['quantidade'].setValue(1);
       this.gerenciarOrdemForm.controls['total'].setValue(
         this.gerenciarOrdemForm.controls['quantidade'].value *
-          this.gerenciarOrdemForm.controls['preco'].value
+        this.gerenciarOrdemForm.controls['preco'].value
       );
     }
   }

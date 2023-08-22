@@ -1,0 +1,63 @@
+/* A classe .mat-toolbar é usada para estilizar o componente <mat-toolbar> do Angular Material,
+   que é um container para cabeçalhos, títulos ou ações de navegação.
+   Neste estilo, estamos aplicando margens negativas para ajustar o posicionamento e a largura
+   automática para que o conteúdo interno determine o tamanho. Além disso, estamos adicionando uma
+   margem inferior de 10 pixels para espaçamento entre elementos. */
+.mat-toolbar {
+  margin: -24px; /* Margem negativa de 24 pixels para ajuste de posicionamento */
+  margin-bottom: 10px; /* Margem inferior de 10 pixels para espaçamento entre elementos */
+  width: auto; /* Largura automática com base no conteúdo interno */
+}
+
+/* O elemento <mat-form-field> é um componente do Angular Material que é usado para agrupar
+     um <input>, <select> ou <textarea> com uma <mat-label>, <mat-error> e outras mensagens.
+     Neste estilo, estamos definindo um espaçamento interno de 5 pixels em todas as direções
+     para criar um espaço entre o conteúdo interno e a borda do elemento. */
+mat-form-field {
+  padding: 5px; /* Espaçamento interno de 5 pixels em todas as direções */
+}
+
+/* A classe .float-right é usada para aplicar a propriedade 'float' e alinhar elementos à direita.
+     Isso pode ser útil para criar layouts onde elementos flutuam à direita de seu contêiner. */
+.float-right {
+  float: right; /* Alinhar o elemento à direita do contêiner */
+}
+
+/* O componente <mat-card> do Angular Material é estilizado aqui com um espaçamento interno de 20 pixels.
+     Isso adiciona espaço dentro do cartão para separar o conteúdo das bordas do cartão. */
+mat-card {
+  padding: 20px; /* Espaçamento interno de 20 pixels */
+}
+
+/* A tag <table> é estilizada com largura de 100%, garantindo que a tabela ocupe todo o espaço disponível
+     em seu contêiner. Isso é útil para criar tabelas responsivas que se ajustam ao tamanho da tela. */
+table {
+  width: 100%; /* Largura de 100% para ocupar todo o espaço disponível */
+}
+
+/* O elemento com o ID #clientes (provavelmente uma tabela de clientes) é estilizado aqui.
+     Definimos uma fonte, borda colapsada, e largura de 100% para criar uma tabela bem formatada. */
+#clientes {
+  font-family: Arial, Helvetica, sans-serif; /* Define a família de fontes para a tabela */
+  border-collapse: collapse; /* Colapsa as bordas da tabela para uma aparência mais limpa */
+  width: 100%; /* Largura de 100% para ocupar todo o espaço disponível */
+}
+
+/* Tanto as células de dados <td> quanto os cabeçalhos de tabela <th> dentro da tabela de clientes (#clientes)
+     recebem bordas de 1 pixel em cinza claro (#ddd) e preenchimento de 8 pixels para espaçamento interno. */
+#clientes td,
+#clientes th {
+  border: 1px solid #ddd; /* Borda de 1 pixel em cinza claro (#ddd) */
+  padding: 8px; /* Espaçamento interno de 8 pixels */
+}
+
+/* Os cabeçalhos de tabela <th> dentro da tabela de clientes (#clientes) recebem um espaçamento
+     maior no topo e na parte inferior, alinhamento do texto à esquerda, cor de fundo verde e cor do texto branco.
+     Isso cria uma aparência distintiva para os cabeçalhos da tabela. */
+#clientes th {
+  padding-top: 12px; /* Espaçamento superior de 12 pixels */
+  padding-bottom: 12px; /* Espaçamento inferior de 12 pixels */
+  text-align: left; /* Alinhamento do texto à esquerda */
+  background-color: #04aa6d; /* Cor de fundo verde (#04aa6d) */
+  color: white; /* Cor do texto branco */
+}

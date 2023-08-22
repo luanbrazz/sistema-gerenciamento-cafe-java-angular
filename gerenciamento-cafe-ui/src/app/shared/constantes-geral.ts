@@ -10,6 +10,8 @@ export class ConstantesGeral {
   public static produtoAdicionadoSucesso: string =
     'O produto foi adicionado com sucesso!';
 
+  public static erroTabela: string = "Ocorreu um erro ao buscar os dados";
+
   public static nomeRegex: string = '[a-zA-Z0-9À-ú ]*';
 
   // [A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3} regular que valida um endereço de e-mail. Essa expressão regular permite letras maiúsculas, letras minúsculas, números e alguns caracteres
@@ -27,4 +29,5 @@ export class ConstantesGeral {
   public static error: string = 'error';
 
   public static success: string = 'success';
+
 }

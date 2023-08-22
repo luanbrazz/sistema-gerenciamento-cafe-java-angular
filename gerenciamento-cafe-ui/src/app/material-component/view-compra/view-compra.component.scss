@@ -1,0 +1,14 @@
+/* Define a classe de estilo para alinhar elementos à direita usando a propriedade float */
+.float-right {
+  float: right;
+}
+
+/* Define o estilo para o elemento mat-card, configurando o preenchimento interno */
+mat-card {
+  padding: 20px;
+}
+
+/* Define o estilo para a tabela, configurando a largura para ocupar 100% do espaço disponível */
+table {
+  width: 100%;
+}

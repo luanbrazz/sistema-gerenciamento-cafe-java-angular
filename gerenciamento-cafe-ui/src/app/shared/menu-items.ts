@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { Injectable } from '@angular/core';
 
 // Interface para representar os itens do menu
 export interface Menu {
@@ -11,11 +11,42 @@ export interface Menu {
 
 // Declaração do array de itens de menu
 const MENUITEMS = [
-  { state: 'dashboard', nome: 'Dashboard', type: 'link', icon: 'dashboard', role: '' },
-  { state: 'categoria', nome: 'Gerenciar Categorias', type: 'link', icon: 'category', role: 'admin' },
-  { state: 'produto', nome: 'Gerenciar Produtos', type: 'link', icon: 'inventory_2', role: 'admin' },
-  { state: 'ordem', nome: 'Gerenciar Pedidos', type: 'link', icon: 'shopping_cart', role: '' }
-]
+  {
+    state: 'dashboard',
+    nome: 'Dashboard',
+    type: 'link',
+    icon: 'dashboard',
+    role: '',
+  },
+  {
+    state: 'categoria',
+    nome: 'Gerenciar Categorias',
+    type: 'link',
+    icon: 'category',
+    role: 'admin',
+  },
+  {
+    state: 'produto',
+    nome: 'Gerenciar Produtos',
+    type: 'link',
+    icon: 'inventory_2',
+    role: 'admin',
+  },
+  {
+    state: 'ordem',
+    nome: 'Gerenciar Pedidos',
+    type: 'link',
+    icon: 'shopping_cart',
+    role: '',
+  },
+  {
+    state: 'compra',
+    nome: 'Historico de Vendas',
+    type: 'link',
+    icon: 'backup_table',
+    role: '',
+  },
+];
 
 // Serviço injetável para fornecer itens de menu
 @Injectable()
