@@ -1,45 +1,54 @@
+<!-- Card para a gestão de ordens de venda -->
 <mat-card>
+  <!-- Título da seção -->
   <b><span>Gestão de Ordem de Vendas</span></b>
+  <!-- Botão de enviar e imprimir, desativado com base na função validarSubmit() -->
   <button mat-flat-button color="primary" class="float-right" [disabled]="validarSubmit()" (click)="submitAction()">
     <mat-icon class="mat-18">print</mat-icon> "Enviar & Obter Fatura
   </button>
 </mat-card>
 
+<!-- Linha horizontal para separação -->
 <hr />
 
+<!-- Card para detalhes do cliente -->
 <mat-card>
   <b><span>Detalhes do Cliente</span></b>
+  <!-- Formulário com controles ligados a gerenciarOrdemForm -->
   <form [formGroup]="gerenciarOrdemForm">
     <div fxFlex fxLayout="column">
       <div fxLayout="row wrap">
-        <!-- Nome -->
+        <!-- Campo do nome -->
         <mat-form-field appearance="standard" fxFlex>
           <mat-label>Nome</mat-label>
           <input matInput formControlName="nome" required />
+          <!-- Mensagem de erro para o campo nome -->
           <mat-error *ngIf="exibirErro('nome')">
             <span [innerHTML]="getErrorMessage('nome')"></span>
           </mat-error>
         </mat-form-field>
 
-        <!-- E-mail -->
+        <!-- Campo do e-mail -->
         <mat-form-field appearance="standard" fxFlex>
           <mat-label>E-mail</mat-label>
           <input matInput formControlName="email" required />
+          <!-- Mensagem de erro para o campo e-mail -->
           <mat-error *ngIf="exibirErro('email')">
             <span [innerHTML]="getErrorMessage('email')"></span>
           </mat-error>
         </mat-form-field>
 
-        <!-- Celular/Telefone -->
+        <!-- Campo de Celular/Telefone -->
         <mat-form-field appearance="standard" fxFlex>
           <mat-label>Celular/Telefone</mat-label>
           <input matInput formControlName="numeroContato" required />
+          <!-- Mensagem de erro para o campo numeroContato -->
           <mat-error *ngIf="exibirErro('numeroContato')">
             <span [innerHTML]="getErrorMessage('numeroContato')"></span>
           </mat-error>
         </mat-form-field>
 
-        <!-- Método de Pagamento -->
+        <!-- Campo de Método de Pagamento -->
         <mat-form-field appearance="standard" fxFlex>
           <mat-label>Método de Pagamento</mat-label>
           <mat-select formControlName="pagamento" required>
@@ -47,6 +56,7 @@
               {{ metodo }}
             </mat-option>
           </mat-select>
+          <!-- Mensagem de erro para o campo de pagamento -->
           <mat-error *ngIf="exibirErro('pagamento')">
             <span [innerHTML]="getErrorMessage('pagamento')"></span>
           </mat-error>
@@ -55,8 +65,10 @@
     </div>
   </form>
 </mat-card>
-
+<!-- Linha horizontal para separação -->
 <hr />
+
+<!-- O código continua... -->
 
 <mat-card>
   <b><span>Selecione o Produto:</span></b>
@@ -97,7 +109,6 @@
         <!-- Quantidade -->
         <mat-form-field appearance="standard" fxFlex>
           <mat-label>Quantidade</mat-label>
-          <!-- <input type="number" matInput formControlName="quantidade" required (keyup)="setQuantidade($event)" #input /> -->
           <input type="number" matInput formControlName="quantidade" required (input)="setQuantidade($event)" #input />
           <mat-error *ngIf="exibirErro('quantidade')">
             <span [innerHTML]="getErrorMessage('quantidade')"></span>
