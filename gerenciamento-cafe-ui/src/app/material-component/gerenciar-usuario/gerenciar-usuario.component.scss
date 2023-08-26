@@ -1,0 +1,15 @@
+// A classe .float-right é usada para fazer um elemento flutuar à direita do seu contêiner.
+.float-right {
+  float: right;
+}
+
+// Estiliza todos os elementos <mat-card> (um componente do Angular Material que serve como um content container).
+// Aqui, estamos definindo um padding (espaçamento interno) de 20 pixels.
+mat-card {
+  padding: 20px;
+}
+
+// Define a largura das tabelas para ocupar 100% da largura do seu contêiner pai.
+table {
+  width: 100%;
+}

@@ -46,6 +46,13 @@ const MENUITEMS = [
     icon: 'backup_table',
     role: '',
   },
+  {
+    state: 'usuario',
+    nome: 'Usuários',
+    type: 'link',
+    icon: 'people',
+    role: 'admin',
+  }
 ];
 
 // Serviço injetável para fornecer itens de menu

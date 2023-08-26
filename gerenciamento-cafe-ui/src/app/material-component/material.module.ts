@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { GerenciarOrdemComponent } from './gerenciar-ordem/gerenciar-ordem.component';
 import { ViewCompraComponent } from './view-compra/view-compra.component';
 import { ViewCompraProdutosComponent } from './dialog/view-compra-produtos/view-compra-produtos.component';
+import { GerenciarUsuarioComponent } from './gerenciar-usuario/gerenciar-usuario.component';
 
 // Decoração do módulo MaterialComponentsModule
 @NgModule({
@@ -40,7 +41,7 @@ import { ViewCompraProdutosComponent } from './dialog/view-compra-produtos/view-
   providers: [], // Define os provedores de serviços
   declarations: [
     ConfirmacaoComponent, // Declara o componente ConfirmacaoComponent
-    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent, GerenciarProdutoComponent, ProdutoComponent, GerenciarOrdemComponent, ViewCompraComponent, ViewCompraProdutosComponent // Declara o componente AlterarSenhaComponent
+    AlterarSenhaComponent, GerenciarCategoriaComponent, CategoriaComponent, GerenciarProdutoComponent, ProdutoComponent, GerenciarOrdemComponent, ViewCompraComponent, ViewCompraProdutosComponent, GerenciarUsuarioComponent // Declara o componente AlterarSenhaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -12,6 +12,7 @@ import { RouteGuardService } from '../services/route-guard.service';
 import { GerenciarProdutoComponent } from './gerenciar-produto/gerenciar-produto.component';
 import { GerenciarOrdemComponent } from './gerenciar-ordem/gerenciar-ordem.component';
 import { ViewCompraComponent } from './view-compra/view-compra.component';
+import { GerenciarUsuarioComponent } from './gerenciar-usuario/gerenciar-usuario.component';
 
 // Exporta uma constante chamada 'MaterialRoutes' que é um array de rotas
 export const MaterialRoutes: Routes = [
@@ -48,4 +49,12 @@ export const MaterialRoutes: Routes = [
       expectedRole: ['admin', 'usuario'],
     },
   },
+  {
+    path: 'usuario',
+    component: GerenciarUsuarioComponent,
+    canActivate: [RouteGuardService],
+    data: {
+      expectedRole: ['admin'],
+    },
+  }
 ];
